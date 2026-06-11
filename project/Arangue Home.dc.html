@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { background: #F6F7FA; }
+  ::selection { background: #1B36A8; color: #fff; }
+  select, input, textarea { font-family: 'Manrope', sans-serif; }
+  @keyframes arFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @keyframes arFade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</helmet>
+
+<div style="font-family:'Manrope',sans-serif; color:#1B2A4E; background:#F6F7FA; min-height:100vh; overflow-x:hidden;">
+
+  <!-- ===================== NAV ===================== -->
+  <header style="{{ navStyle }}">
+    <nav style="max-width:1240px; margin:0 auto; padding:16px 32px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="#/" style="display:flex; align-items:center; gap:12px; text-decoration:none;">
+        <span style="display:flex; color:{{ logoColor }};">{{ logo }}</span>
+        <span style="display:flex; flex-direction:column; line-height:1;">
+          <span style="font-family:'Sora',sans-serif; font-weight:800; font-size:19px; letter-spacing:.06em; color:{{ brandColor }};">ARANGUE</span>
+          <span style="font-weight:700; font-size:10.5px; letter-spacing:.34em; color:{{ brandSub }};">PROPIEDADES</span>
+        </span>
+      </a>
+      <div style="display:flex; align-items:center; gap:30px; font-size:14.5px; {{ navLinksHide }}">
+        <a href="#/" style="text-decoration:none; {{ lkInicio }}" style-hover="opacity:.7">Inicio</a>
+        <a href="#/propiedades" style="text-decoration:none; {{ lkProp }}" style-hover="opacity:.7">Propiedades</a>
+        <a href="#/#zonas" style="text-decoration:none; {{ lkZonas }}" style-hover="opacity:.7">Zonas</a>
+        <a href="#/#tasacion" style="text-decoration:none; {{ lkTasa }}" style-hover="opacity:.7">Tasaciones</a>
+        <a href="#/#contacto" style="text-decoration:none; {{ lkContacto }}" style-hover="opacity:.7">Contacto</a>
+      </div>
+      <div style="display:flex; align-items:center; gap:14px; {{ navRightHide }}">
+        <a href="tel:3471595464" style="display:flex; align-items:center; gap:7px; text-decoration:none; font-weight:700; font-size:14.5px; color:{{ phoneColor }};">
+          <span style="display:flex; color:{{ phoneIcon }};"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" /></svg></span>
+          3471-595464
+        </a>
+        <a href="#/#contacto" style="text-decoration:none; font-weight:700; font-size:14px; padding:11px 19px; border-radius:11px; transition:transform .2s; {{ ctaStyle }}" style-hover="transform:translateY(-1px)">Publicá tu propiedad</a>
+      </div>
+      <button onClick="{{ toggleMenu }}" aria-label="Menú" style="{{ hambStyle }}">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="{{ hambColor }}" stroke-width="2.2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18" /></svg>
+      </button>
+    </nav>
+  </header>
+  <div style="{{ spacerStyle }}"></div>
+  <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+  <div style="{{ menuPanelStyle }}">
+    <a href="#/" onClick="{{ closeMenu }}" style="{{ menuLinkStyle }}">Inicio</a>
+    <a href="#/propiedades" onClick="{{ closeMenu }}" style="{{ menuLinkStyle }}">Propiedades</a>
+    <a href="#/#zonas" onClick="{{ closeMenu }}" style="{{ menuLinkStyle }}">Zonas</a>
+    <a href="#/#tasacion" onClick="{{ closeMenu }}" style="{{ menuLinkStyle }}">Tasaciones</a>
+    <a href="#/#contacto" onClick="{{ closeMenu }}" style="{{ menuLinkStyle }}">Contacto</a>
+    <a href="tel:3471595464" onClick="{{ closeMenu }}" style="{{ menuPhoneStyle }}">Llamar 3471-595464</a>
+    <a href="#/#contacto" onClick="{{ closeMenu }}" style="{{ menuCtaStyle }}">Publicá tu propiedad</a>
+  </div>
+  </sc-if>
+
+  <!-- ===================== ROUTE: HOME ===================== -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div>
+
+    <!-- HERO A -->
+    <sc-if value="{{ isA }}" hint-placeholder-val="{{ true }}">
+    <div style="position:relative; overflow:hidden; background:linear-gradient(165deg,#E7EDFE 0%, #D5E0FB 42%, #C7D6F6 100%);">
+      <div style="position:absolute; top:-140px; right:-70px; width:540px; height:540px; border-radius:50%; background:radial-gradient(circle at 32% 32%, rgba(92,139,255,.5), rgba(27,54,168,0) 70%); z-index:0;"></div>
+      <div style="position:absolute; bottom:10px; left:-110px; width:380px; height:380px; border-radius:50%; background:radial-gradient(circle at 50% 50%, rgba(27,54,168,.16), rgba(27,54,168,0) 70%); z-index:0;"></div>
+    <section style="position:relative; z-index:1; max-width:1240px; margin:0 auto; padding:64px 32px 60px; display:grid; grid-template-columns:1.05fr .95fr; gap:52px; align-items:center; {{ heroAPad }} {{ heroAGrid }}">
+      <div style="animation:arFade .6s ease both;">
+        <span style="display:inline-flex; align-items:center; gap:8px; background:#EAEEFB; color:#1B36A8; font-weight:700; font-size:13px; padding:7px 14px; border-radius:999px;">
+          <span style="width:7px; height:7px; border-radius:50%; background:#1B36A8;"></span>
+          Inmobiliaria en Cañada de Gómez
+        </span>
+        <h1 style="font-family:'Sora',sans-serif; font-weight:800; font-size:54px; line-height:1.05; letter-spacing:-.025em; color:#101F40; margin:20px 0 0; {{ heroAH1 }}">Tu próximo lugar<br />en la región, <span style="color:#1B36A8;">bien acompañado.</span></h1>
+        <p style="font-size:17px; line-height:1.6; color:#56607A; max-width:470px; margin:18px 0 0; text-wrap:pretty;">Casas, departamentos, terrenos, campos y galpones en Cañada de Gómez, Las Parejas, Rosario y toda la zona.</p>
+
+        <div style="margin-top:28px; background:#fff; border:1px solid #E6E9F0; border-radius:18px; padding:16px; box-shadow:0 18px 44px rgba(16,24,64,.09);">
+          <div style="display:flex; gap:6px; margin-bottom:13px;">
+            <button onClick="{{ setHeroVenta }}" style="{{ heroVentaStyle }}">Comprar</button>
+            <button onClick="{{ setHeroAlquiler }}" style="{{ heroAlquilerStyle }}">Alquilar</button>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; {{ searchRow1 }}">
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Tipo</span>
+              <select value="{{ hero.tipo }}" onChange="{{ onHeroTipo }}" style="width:100%; -webkit-appearance:none; appearance:none; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; cursor:pointer; padding:0;">
+                <option value="">Cualquiera</option><option value="Casa">Casa</option><option value="Departamento">Departamento</option><option value="Terreno">Terreno</option><option value="Campo">Campo</option><option value="Galpón">Galpón</option><option value="Local">Local</option>
+              </select>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Zona</span>
+              <select value="{{ hero.zona }}" onChange="{{ onHeroZona }}" style="width:100%; -webkit-appearance:none; appearance:none; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; cursor:pointer; padding:0;">
+                <option value="">Toda la región</option><option value="Cañada de Gómez">Cañada de Gómez</option><option value="Rosario">Rosario</option><option value="Las Parejas">Las Parejas</option><option value="Armstrong">Armstrong</option><option value="Carcarañá">Carcarañá</option><option value="Villa Carlos Paz">Villa Carlos Paz</option>
+              </select>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Dormitorios</span>
+              <select value="{{ hero.dorm }}" onChange="{{ onHeroDorm }}" style="width:100%; -webkit-appearance:none; appearance:none; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; cursor:pointer; padding:0;">
+                <option value="">Cualquiera</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option><option value="4">4 o más</option>
+              </select>
+            </label>
+          </div>
+          <div style="display:grid; grid-template-columns:84px 1fr 1fr auto; gap:10px; margin-top:10px; {{ searchRow2 }}">
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Moneda</span>
+              <select value="{{ hero.currency }}" onChange="{{ onHeroCurrency }}" style="width:100%; -webkit-appearance:none; appearance:none; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; cursor:pointer; padding:0;">
+                <option value="USD">USD</option><option value="ARS">ARS</option>
+              </select>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Precio desde</span>
+              <input type="number" value="{{ hero.min }}" onChange="{{ onHeroMin }}" placeholder="0" style="width:100%; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; padding:0;" />
+            </label>
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Hasta</span>
+              <input type="number" value="{{ hero.max }}" onChange="{{ onHeroMax }}" placeholder="Sin tope" style="width:100%; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; padding:0;" />
+            </label>
+            <button onClick="{{ buscarHero }}" style="background:#1B36A8; color:#fff; border:none; border-radius:11px; padding:0 22px; font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 8px 18px rgba(27,54,168,.28);" style-hover="background:#16308f">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div style="position:relative; height:540px; animation:arFade .7s ease both; {{ heroAImgHide }}">
+        <div style="position:absolute; top:0; right:0; width:78%; height:62%; border-radius:22px; overflow:hidden; box-shadow:0 26px 60px rgba(16,24,64,.2);">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=900&q=80" alt="Casa moderna" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+        <div style="position:absolute; bottom:0; left:0; width:62%; height:50%; border-radius:22px; overflow:hidden; border:6px solid #F6F7FA; box-shadow:0 26px 60px rgba(16,24,64,.18);">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Interior" style="width:100%; height:100%; object-fit:cover;" />
+        </div>
+        <div style="position:absolute; bottom:24px; right:8px; background:#fff; border-radius:16px; padding:16px 20px; box-shadow:0 18px 40px rgba(16,24,64,.2); animation:arFloat 5s ease-in-out infinite;">
+          <div style="font-family:'Sora',sans-serif; font-weight:800; font-size:26px; color:#1B36A8; line-height:1;">+250</div>
+          <div style="font-size:12.5px; font-weight:600; color:#56607A; margin-top:3px;">propiedades activas</div>
+        </div>
+        <div style="position:absolute; top:16px; left:0; background:#101F40; color:#fff; border-radius:14px; padding:11px 16px; box-shadow:0 14px 32px rgba(16,24,64,.25);">
+          <div style="font-size:10.5px; font-weight:700; letter-spacing:.16em; color:#8FA0CF;">MATRÍCULA</div>
+          <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:15px; margin-top:2px;">COCIR 2601</div>
+        </div>
+      </div>
+    </section>
+      <svg viewBox="0 0 1440 110" preserveAspectRatio="none" style="display:block; position:relative; z-index:1; width:100%; height:72px; margin-bottom:-1px;"><path d="M0 72 C 240 18, 520 18, 760 54 C 1000 90, 1220 98, 1440 48 L1440 110 L0 110 Z" fill="#F6F7FA" /></svg>
+    </div>
+    </sc-if>
+
+    <!-- HERO B -->
+    <sc-if value="{{ isB }}" hint-placeholder-val="{{ false }}">
+    <section style="position:relative; min-height:700px; display:flex; align-items:center; justify-content:center; text-align:center; overflow:hidden;">
+      <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1600&q=80" alt="Propiedad destacada" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover;" />
+      <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,17,46,.82) 0%, rgba(10,22,74,.62) 42%, rgba(13,40,128,.72) 100%);"></div>
+      <div style="position:relative; z-index:2; max-width:820px; padding:120px 32px 96px; animation:arFade .7s ease both; {{ heroBPad }}">
+        <span style="display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28); color:#fff; font-weight:700; font-size:13px; padding:7px 15px; border-radius:999px; backdrop-filter:blur(6px);">
+          <span style="width:7px; height:7px; border-radius:50%; background:#5C8BFF;"></span>
+          Cañada de Gómez · Matrícula COCIR 2601
+        </span>
+        <h1 style="font-family:'Sora',sans-serif; font-weight:800; font-size:58px; line-height:1.04; letter-spacing:-.03em; color:#fff; margin:22px 0 0; text-shadow:0 2px 30px rgba(0,0,0,.25); {{ heroBH1 }}">Encontrá la propiedad<br />que estás buscando</h1>
+        <p style="font-size:18px; line-height:1.6; color:rgba(255,255,255,.9); max-width:560px; margin:16px auto 0; text-wrap:pretty;">Más de 250 propiedades en venta y alquiler en toda la región, con el respaldo de una operación registrada.</p>
+
+        <div style="margin:28px auto 0; max-width:680px; background:#fff; border-radius:18px; padding:16px; box-shadow:0 24px 60px rgba(0,0,0,.34); text-align:left;">
+          <div style="display:flex; gap:6px; margin-bottom:13px;">
+            <button onClick="{{ setHeroVenta }}" style="{{ heroVentaStyle }}">Comprar</button>
+            <button onClick="{{ setHeroAlquiler }}" style="{{ heroAlquilerStyle }}">Alquilar</button>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; {{ searchRow1 }}">
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Tipo</span>
+              <select value="{{ hero.tipo }}" onChange="{{ onHeroTipo }}" style="width:100%; -webkit-appearance:none; appearance:none; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; cursor:pointer; padding:0;">
+                <option value="">Cualquiera</option><option value="Casa">Casa</option><option value="Departamento">Departamento</option><option value="Terreno">Terreno</option><option value="Campo">Campo</option><option value="Galpón">Galpón</option><option value="Local">Local</option>
+              </select>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Zona</span>
+              <select value="{{ hero.zona }}" onChange="{{ onHeroZona }}" style="width:100%; -webkit-appearance:none; appearance:none; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; cursor:pointer; padding:0;">
+                <option value="">Toda la región</option><option value="Cañada de Gómez">Cañada de Gómez</option><option value="Rosario">Rosario</option><option value="Las Parejas">Las Parejas</option><option value="Armstrong">Armstrong</option><option value="Carcarañá">Carcarañá</option><option value="Villa Carlos Paz">Villa Carlos Paz</option>
+              </select>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Dormitorios</span>
+              <select value="{{ hero.dorm }}" onChange="{{ onHeroDorm }}" style="width:100%; -webkit-appearance:none; appearance:none; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; cursor:pointer; padding:0;">
+                <option value="">Cualquiera</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option><option value="4">4 o más</option>
+              </select>
+            </label>
+          </div>
+          <div style="display:grid; grid-template-columns:84px 1fr 1fr auto; gap:10px; margin-top:10px; {{ searchRow2 }}">
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Moneda</span>
+              <select value="{{ hero.currency }}" onChange="{{ onHeroCurrency }}" style="width:100%; -webkit-appearance:none; appearance:none; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; cursor:pointer; padding:0;">
+                <option value="USD">USD</option><option value="ARS">ARS</option>
+              </select>
+            </label>
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Precio desde</span>
+              <input type="number" value="{{ hero.min }}" onChange="{{ onHeroMin }}" placeholder="0" style="width:100%; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; padding:0;" />
+            </label>
+            <label style="display:flex; flex-direction:column; gap:4px; background:#F6F7FA; border:1px solid #E6E9F0; border-radius:11px; padding:9px 13px;">
+              <span style="font-size:10.5px; font-weight:700; letter-spacing:.05em; color:#8A93A6; text-transform:uppercase;">Hasta</span>
+              <input type="number" value="{{ hero.max }}" onChange="{{ onHeroMax }}" placeholder="Sin tope" style="width:100%; background:transparent; border:none; outline:none; font-family:'Manrope',sans-serif; font-size:14.5px; font-weight:600; color:#1B2A4E; padding:0;" />
+            </label>
+            <button onClick="{{ buscarHero }}" style="background:#1B36A8; color:#fff; border:none; border-radius:11px; padding:0 22px; font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; cursor:pointer; display:flex; align-items:center; gap:8px;" style-hover="background:#16308f">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+              Buscar
+            </button>
+          </div>
+        </div>
+      </div>
+      <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="position:absolute; left:0; right:0; bottom:-1px; width:100%; height:90px; z-index:2;"><path d="M0 64 C 240 8, 480 8, 720 52 C 960 96, 1200 112, 1440 56 L1440 120 L0 120 Z" fill="#F6F7FA" /></svg>
+    </section>
+    </sc-if>
+
+    <!-- trust strip -->
+    <section style="max-width:1240px; margin:0 auto; padding:8px 32px; {{ secPad }}">
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:24px; border-top:1px solid #E6E9F0; border-bottom:1px solid #E6E9F0; padding:26px 0; {{ trustGrid }}">
+        <sc-for list="{{ stats }}" as="st" hint-placeholder-count="4">
+          <div style="text-align:center;">
+            <div style="font-family:'Sora',sans-serif; font-weight:800; font-size:32px; color:#1B36A8; line-height:1;">{{ st.value }}</div>
+            <div style="font-size:13.5px; font-weight:600; color:#697287; margin-top:7px;">{{ st.label }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- featured -->
+    <section style="max-width:1240px; margin:0 auto; padding:60px 32px 24px; {{ secPad }}">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:32px; {{ featHead }}">
+        <div>
+          <span style="font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#1B36A8;">Selección Arangue</span>
+          <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:40px; letter-spacing:-.02em; color:#101F40; margin:10px 0 0;">Propiedades destacadas</h2>
+        </div>
+        <a href="#/propiedades" style="display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#1B36A8; font-weight:700; font-size:15px; border:1.5px solid #C9D2EC; padding:11px 18px; border-radius:11px; transition:background .2s, border-color .2s;" style-hover="background:#EAEEFB; border-color:#1B36A8">
+          Ver todas las propiedades
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+        </a>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; {{ grid3 }}">
+        <sc-for list="{{ featured }}" as="item" hint-placeholder-count="6">
+          <dc-import name="Property Card" item="{{ item }}" href="#/propiedad/{{ item.slug }}" hint-size="100%,430px"></dc-import>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- zonas -->
+    <section id="zonas" style="max-width:1240px; margin:0 auto; padding:60px 32px; {{ secPad }}">
+      <div style="text-align:center; max-width:620px; margin:0 auto 34px;">
+        <span style="font-weight:700; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#1B36A8;">Dónde operamos</span>
+        <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:40px; letter-spacing:-.02em; color:#101F40; margin:10px 0 12px;">Conocemos la región</h2>
+        <p style="font-size:17px; line-height:1.6; color:#56607A; margin:0;">De Cañada de Gómez a Rosario, operamos en las localidades y zonas rurales que mejor conocemos.</p>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px; {{ grid3 }}">
+        <sc-for list="{{ zonas }}" as="z" hint-placeholder-count="6">
+          <a href="#/propiedades" style="position:relative; display:block; aspect-ratio:16/10; border-radius:16px; overflow:hidden; text-decoration:none; box-shadow:0 6px 18px rgba(16,24,64,.08);">
+            <img src="{{ z.img }}" alt="{{ z.name }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; transition:transform .5s ease;" style-hover="transform:scale(1.06)" />
+            <span style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(8,17,46,0) 35%, rgba(8,17,46,.78) 100%);"></span>
+            <span style="position:absolute; left:18px; bottom:16px; right:18px; display:flex; align-items:center; justify-content:space-between;">
+              <span>
+                <span style="display:block; font-family:'Sora',sans-serif; font-weight:700; font-size:19px; color:#fff;">{{ z.name }}</span>
+                <span style="display:block; font-size:13px; font-weight:600; color:rgba(255,255,255,.82); margin-top:2px;">{{ z.count }}</span>
+              </span>
+              <span style="width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </span>
+            </span>
+          </a>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- tasación -->
+    <section id="tasacion" style="max-width:1240px; margin:0 auto; padding:24px 32px 72px; {{ secPad }}">
+      <div style="position:relative; overflow:hidden; border-radius:26px; background:linear-gradient(120deg,#0A1A4A 0%, #15339E 52%, #1E6FE0 100%); padding:56px; display:grid; grid-template-columns:1.3fr .7fr; gap:40px; align-items:center; {{ tasaPad }} {{ tasaGrid }}">
+        <div style="position:relative; z-index:2;">
+          <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:38px; line-height:1.1; letter-spacing:-.02em; color:#fff; margin:0;">¿Querés saber cuánto vale tu propiedad?</h2>
+          <p style="font-size:17px; line-height:1.6; color:rgba(255,255,255,.85); max-width:480px; margin:16px 0 0;">Tasación profesional sin cargo y sin compromiso. Te decimos un valor de mercado real para tu casa, terreno o campo.</p>
+        </div>
+        <div style="position:relative; z-index:2; display:flex; flex-direction:column; gap:12px;">
+          <a href="#/#contacto" style="background:#fff; color:#15233F; text-decoration:none; text-align:center; font-weight:700; font-size:16px; padding:16px 22px; border-radius:13px; box-shadow:0 12px 28px rgba(0,0,0,.2);" style-hover="transform:translateY(-1px)">Solicitar tasación gratis</a>
+          <a href="https://wa.me/543471595464" style="display:flex; align-items:center; justify-content:center; gap:9px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.3); color:#fff; text-decoration:none; font-weight:700; font-size:15px; padding:15px 22px; border-radius:13px;" style-hover="background:rgba(255,255,255,.2)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M.06 24l1.68-6.13A11.86 11.86 0 0 1 .14 11.9C.14 5.33 5.5 0 12.08 0a11.82 11.82 0 0 1 8.42 3.49 11.78 11.78 0 0 1 3.5 8.42c0 6.57-5.37 11.9-11.95 11.9a12 12 0 0 1-5.72-1.46zm6.63-3.79c1.74.99 3 1.18 4.39 1.18 5.46 0 9.9-4.42 9.9-9.86a9.8 9.8 0 0 0-2.9-7 9.74 9.74 0 0 0-6.99-2.9C6.6 1.63 2.16 6.05 2.16 11.5a9.8 9.8 0 0 0 1.5 5.23l-.99 3.62z" /></svg>
+            Escribinos por WhatsApp
+          </a>
+        </div>
+        <svg viewBox="0 0 600 200" preserveAspectRatio="none" style="position:absolute; right:-40px; bottom:-60px; width:60%; height:auto; opacity:.18; z-index:1;"><path d="M0 120 C150 40 350 40 600 120 L600 260 L0 260 Z" fill="#5C8BFF" /></svg>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ===================== ROUTE: LISTADO ===================== -->
+  <sc-if value="{{ isListado }}" hint-placeholder-val="{{ false }}">
+  <div>
+    <sc-if value="{{ isA }}" hint-placeholder-val="{{ true }}">
+    <section style="background:#fff; border-bottom:1px solid #E6E9F0;">
+      <div style="max-width:1240px; margin:0 auto; padding:34px 32px 30px; {{ secPad }}">
+        <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#8A93A6; font-weight:600; margin-bottom:12px;">
+          <a href="#/" style="color:#8A93A6; text-decoration:none;" style-hover="color:#1B36A8">Inicio</a><span>/</span><span style="color:#1B36A8;">Propiedades</span>
+        </div>
+        <h1 style="font-family:'Sora',sans-serif; font-weight:800; font-size:36px; letter-spacing:-.02em; color:#101F40; margin:0;">Propiedades en venta y alquiler</h1>
+        <p style="font-size:16px; color:#56607A; margin:8px 0 0;">Encontrá tu próxima propiedad en Cañada de Gómez, Rosario y toda la región.</p>
+      </div>
+    </section>
+    </sc-if>
+    <sc-if value="{{ isB }}" hint-placeholder-val="{{ false }}">
+    <section style="position:relative; overflow:hidden; background:linear-gradient(120deg,#0A1A4A 0%, #15339E 60%, #1E6FE0 120%);">
+      <div style="max-width:1240px; margin:0 auto; padding:44px 32px 56px; {{ secPad }}">
+        <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:rgba(255,255,255,.6); font-weight:600; margin-bottom:12px;">
+          <a href="#/" style="color:rgba(255,255,255,.6); text-decoration:none;" style-hover="color:#fff">Inicio</a><span>/</span><span style="color:#fff;">Propiedades</span>
+        </div>
+        <h1 style="font-family:'Sora',sans-serif; font-weight:800; font-size:38px; letter-spacing:-.02em; color:#fff; margin:0;">Propiedades en venta y alquiler</h1>
+        <p style="font-size:16px; color:rgba(255,255,255,.82); margin:8px 0 0;">Encontrá tu próxima propiedad en Cañada de Gómez, Rosario y toda la región.</p>
+      </div>
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none" style="position:absolute; left:0; right:0; bottom:-1px; width:100%; height:46px;"><path d="M0 40 C 360 4, 720 4, 1080 36 C 1260 52, 1350 56, 1440 40 L1440 80 L0 80 Z" fill="#F6F7FA" /></svg>
+    </section>
+    </sc-if>
+
+    <section style="max-width:1240px; margin:0 auto; padding:30px 32px 72px; display:grid; grid-template-columns:296px 1fr; gap:28px; align-items:start; {{ secPad }} {{ listBodyResp }}">
+      <aside style="position:sticky; top:84px; background:#fff; border:1px solid #E6E9F0; border-radius:18px; padding:20px; box-shadow:0 4px 20px rgba(16,24,64,.05); {{ asideResp }}">
+        <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+          <span style="font-family:'Sora',sans-serif; font-weight:700; font-size:17px; color:#101F40;">Filtros</span>
+          <button onClick="{{ clearF }}" style="background:none; border:none; color:#1B36A8; font-family:'Manrope',sans-serif; font-weight:700; font-size:13px; cursor:pointer; padding:0;" style-hover="opacity:.7">Limpiar</button>
+        </div>
+
+        <button onClick="{{ toggleOport }}" style="{{ oportBtnStyle }}">
+          <span style="display:inline-flex; align-items:center; gap:8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z" /></svg>
+            Solo oportunidades
+          </span>
+          <span style="font-size:11.5px; opacity:.85;">{{ oportCount }}</span>
+        </button>
+
+        <div style="margin-top:20px;">
+          <span style="display:block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#8A93A6; margin-bottom:10px;">Tipo de operación</span>
+          <div style="display:flex; gap:8px;">
+            <sc-for list="{{ opOptions }}" as="o" hint-placeholder-count="2">
+              <button onClick="{{ o.set }}" style="flex:1; {{ o.style }}">{{ o.name }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:20px; border-top:1px solid #EEF1F6; padding-top:18px;">
+          <span style="display:block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#8A93A6; margin-bottom:10px;">Tipo de propiedad</span>
+          <div style="display:flex; flex-direction:column; gap:3px;">
+            <sc-for list="{{ tipoOptions }}" as="t" hint-placeholder-count="6">
+              <button onClick="{{ t.toggle }}" style="display:flex; align-items:center; gap:10px; background:none; border:none; padding:7px 4px; cursor:pointer; font-family:'Manrope',sans-serif; text-align:left; border-radius:8px;" style-hover="background:#F6F7FA">
+                <span style="{{ t.box }}"><sc-if value="{{ t.on }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></sc-if></span>
+                <span style="flex:1; font-size:14px; font-weight:600; color:#384663;">{{ t.name }}</span>
+                <span style="font-size:12.5px; color:#A4ACBD;">{{ t.count }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:18px; border-top:1px solid #EEF1F6; padding-top:18px;">
+          <span style="display:block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#8A93A6; margin-bottom:10px;">Ubicación</span>
+          <div style="display:flex; flex-direction:column; gap:3px;">
+            <sc-for list="{{ zonaOptions }}" as="z" hint-placeholder-count="6">
+              <button onClick="{{ z.toggle }}" style="display:flex; align-items:center; gap:10px; background:none; border:none; padding:7px 4px; cursor:pointer; font-family:'Manrope',sans-serif; text-align:left; border-radius:8px;" style-hover="background:#F6F7FA">
+                <span style="{{ z.box }}"><sc-if value="{{ z.on }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></sc-if></span>
+                <span style="flex:1; font-size:14px; font-weight:600; color:#384663;">{{ z.name }}</span>
+                <span style="font-size:12.5px; color:#A4ACBD;">{{ z.count }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:18px; border-top:1px solid #EEF1F6; padding-top:18px;">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+            <span style="font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#8A93A6;">Rango de precio</span>
+            <div style="display:flex; gap:4px; background:#F1F3F9; padding:3px; border-radius:9px;">
+              <button onClick="{{ setUSD }}" style="{{ usdStyle }}">USD</button>
+              <button onClick="{{ setARS }}" style="{{ arsStyle }}">ARS</button>
+            </div>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <input type="number" value="{{ f.min }}" onChange="{{ setMin }}" placeholder="Desde" style="width:100%; background:#F6F7FA; border:1px solid #E1E5EE; border-radius:9px; padding:9px 11px; font-family:'Manrope',sans-serif; font-size:13.5px; font-weight:600; color:#1B2A4E; outline:none;" />
+            <span style="color:#C2C9D6;">—</span>
+            <input type="number" value="{{ f.max }}" onChange="{{ setMax }}" placeholder="Hasta" style="width:100%; background:#F6F7FA; border:1px solid #E1E5EE; border-radius:9px; padding:9px 11px; font-family:'Manrope',sans-serif; font-size:13.5px; font-weight:600; color:#1B2A4E; outline:none;" />
+          </div>
+        </div>
+
+        <div style="margin-top:18px; border-top:1px solid #EEF1F6; padding-top:18px;">
+          <span style="display:block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#8A93A6; margin-bottom:10px;">Dormitorios</span>
+          <div style="display:flex; gap:6px;">
+            <sc-for list="{{ dormOptions }}" as="d" hint-placeholder-count="5">
+              <button onClick="{{ d.set }}" style="flex:1; {{ d.style }}">{{ d.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="margin-top:18px; border-top:1px solid #EEF1F6; padding-top:18px;">
+          <button onClick="{{ toggleCredito }}" style="display:flex; align-items:center; justify-content:space-between; width:100%; background:none; border:none; padding:2px; cursor:pointer; font-family:'Manrope',sans-serif;">
+            <span style="font-size:14px; font-weight:700; color:#384663;">Apto crédito</span>
+            <span style="{{ creditoTrack }}"><span style="{{ creditoKnob }}"></span></span>
+          </button>
+        </div>
+
+        <div style="margin-top:18px; border-top:1px solid #EEF1F6; padding-top:18px;">
+          <span style="display:block; font-size:12px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#8A93A6; margin-bottom:10px;">Mostrar</span>
+          <button onClick="{{ toggleVerReservadas }}" style="display:flex; align-items:center; gap:10px; background:none; border:none; padding:7px 4px; cursor:pointer; font-family:'Manrope',sans-serif; text-align:left; border-radius:8px; width:100%;" style-hover="background:#F6F7FA">
+            <span style="{{ resBox }}"><sc-if value="{{ verReservadas }}" hint-placeholder-val="{{ true }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></sc-if></span>
+            <span style="flex:1; font-size:14px; font-weight:600; color:#384663;">Propiedades reservadas</span>
+          </button>
+          <button onClick="{{ toggleVerVendidas }}" style="display:flex; align-items:center; gap:10px; background:none; border:none; padding:7px 4px; cursor:pointer; font-family:'Manrope',sans-serif; text-align:left; border-radius:8px; width:100%;" style-hover="background:#F6F7FA">
+            <span style="{{ venBox }}"><sc-if value="{{ verVendidas }}" hint-placeholder-val="{{ true }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></sc-if></span>
+            <span style="flex:1; font-size:14px; font-weight:600; color:#384663;">Propiedades vendidas</span>
+          </button>
+        </div>
+      </aside>
+
+      <div>
+        <button onClick="{{ toggleFilters }}" style="{{ filtToggleStyle }}">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M7 12h10M10 18h4" /></svg>
+          {{ filtToggleLabel }}
+        </button>
+        <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:18px;">
+          <span style="font-size:15px; color:#56607A;"><strong style="color:#101F40; font-weight:800; font-family:'Sora',sans-serif;">{{ resultCount }}</strong> propiedades encontradas</span>
+          <span style="display:inline-flex; align-items:center; gap:8px; font-size:13.5px; font-weight:600; color:#56607A; background:#fff; border:1px solid #E6E9F0; padding:9px 14px; border-radius:10px;">
+            Ordenar: Más recientes
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8A93A6" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6" /></svg>
+          </span>
+        </div>
+
+        <sc-if value="{{ hasResults }}" hint-placeholder-val="{{ true }}">
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr)); gap:22px;">
+            <sc-for list="{{ filtered }}" as="item" hint-placeholder-count="6">
+              <dc-import name="Property Card" item="{{ item }}" href="#/propiedad/{{ item.slug }}" hint-size="100%,430px"></dc-import>
+            </sc-for>
+          </div>
+        </sc-if>
+        <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+          <div style="text-align:center; padding:70px 20px; background:#fff; border:1px dashed #D5DCEA; border-radius:18px;">
+            <div style="width:54px; height:54px; border-radius:50%; background:#EAEEFB; display:flex; align-items:center; justify-content:center; margin:0 auto 16px;">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m21 21-4.3-4.3" /></svg>
+            </div>
+            <h3 style="font-family:'Sora',sans-serif; font-size:20px; color:#101F40; margin:0 0 6px;">No encontramos propiedades</h3>
+            <p style="font-size:15px; color:#697287; margin:0 0 18px;">Probá ajustar o limpiar los filtros para ver más opciones.</p>
+            <button onClick="{{ clearF }}" style="background:#1B36A8; color:#fff; border:none; font-family:'Manrope',sans-serif; font-weight:700; font-size:14px; padding:11px 20px; border-radius:11px; cursor:pointer;">Limpiar filtros</button>
+          </div>
+        </sc-if>
+      </div>
+    </section>
+  </div>
+  </sc-if>
+
+  <!-- ===================== ROUTE: DETALLE ===================== -->
+  <sc-if value="{{ isDetalle }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:1240px; margin:0 auto; padding:26px 32px 72px; {{ secPad }}">
+    <div style="display:flex; align-items:center; gap:8px; font-size:13px; color:#8A93A6; font-weight:600; margin-bottom:18px;">
+      <a href="#/" style="color:#8A93A6; text-decoration:none;" style-hover="color:#1B36A8">Inicio</a><span>/</span>
+      <a href="#/propiedades" style="color:#8A93A6; text-decoration:none;" style-hover="color:#1B36A8">Propiedades</a><span>/</span>
+      <span style="color:#1B36A8;">{{ sel.title }}</span>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:24px; align-items:start; {{ detGrid }}">
+      <div>
+        <div style="position:relative; aspect-ratio:16/10; border-radius:18px; overflow:hidden; background:#EEF1F6; box-shadow:0 10px 30px rgba(16,24,64,.1);">
+          <img src="{{ mainImg }}" alt="{{ sel.title }}" style="width:100%; height:100%; object-fit:cover;" />
+          <span style="{{ detailBadgeStyle }}">{{ detailBadgeLabel }}</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:10px; margin-top:10px;">
+          <sc-for list="{{ thumbs }}" as="th" hint-placeholder-count="5">
+            <button onClick="{{ th.set }}" style="aspect-ratio:1/1; border-radius:11px; overflow:hidden; border:2px solid; padding:0; cursor:pointer; background:none; {{ th.border }}">
+              <img src="{{ th.src }}" alt="Vista" style="width:100%; height:100%; object-fit:cover; display:block;" />
+            </button>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#fff; border:1px solid #E6E9F0; border-radius:18px; padding:26px; box-shadow:0 10px 30px rgba(16,24,64,.06); position:sticky; top:84px; {{ detSticky }}">
+        <span style="display:inline-block; font-size:12.5px; font-weight:700; letter-spacing:.03em; color:#1B36A8; background:#EAEEFB; padding:5px 11px; border-radius:999px;">{{ sel.type }} · {{ sel.op }}</span>
+        <div style="font-family:'Sora',sans-serif; font-weight:800; font-size:34px; color:#101F40; letter-spacing:-.02em; margin:14px 0 4px;">{{ sel.price }}</div>
+        <h1 style="font-family:'Sora',sans-serif; font-weight:700; font-size:21px; color:#1B2A4E; line-height:1.3; margin:8px 0 0;">{{ sel.title }}</h1>
+        <div style="display:flex; align-items:center; gap:7px; color:#697287; font-size:14.5px; margin-top:8px;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+          {{ sel.loc }}
+        </div>
+        <div style="display:flex; gap:10px; margin-top:18px; padding:16px 0; border-top:1px solid #EEF1F6; border-bottom:1px solid #EEF1F6;">
+          <sc-for list="{{ selSpecs }}" as="sp" hint-placeholder-count="3">
+            <div style="flex:1; text-align:center;">
+              <div style="font-family:'Sora',sans-serif; font-weight:700; font-size:18px; color:#101F40;">{{ sp.value }}</div>
+              <div style="font-size:12px; color:#8A93A6; font-weight:600; margin-top:2px;">{{ sp.label }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:10px; margin-top:18px;">
+          <a href="https://wa.me/543471595464" style="display:flex; align-items:center; justify-content:center; gap:9px; background:#1B36A8; color:#fff; text-decoration:none; font-weight:700; font-size:15px; padding:14px; border-radius:12px;" style-hover="background:#16308f">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M.06 24l1.68-6.13A11.86 11.86 0 0 1 .14 11.9C.14 5.33 5.5 0 12.08 0a11.82 11.82 0 0 1 8.42 3.49 11.78 11.78 0 0 1 3.5 8.42c0 6.57-5.37 11.9-11.95 11.9a12 12 0 0 1-5.72-1.46zm6.63-3.79c1.74.99 3 1.18 4.39 1.18 5.46 0 9.9-4.42 9.9-9.86a9.8 9.8 0 0 0-2.9-7 9.74 9.74 0 0 0-6.99-2.9C6.6 1.63 2.16 6.05 2.16 11.5a9.8 9.8 0 0 0 1.5 5.23l-.99 3.62z" /></svg>
+            Consultar por WhatsApp
+          </a>
+          <a href="tel:3471595464" style="display:flex; align-items:center; justify-content:center; gap:9px; background:#fff; color:#1B36A8; text-decoration:none; font-weight:700; font-size:15px; padding:13px; border-radius:12px; border:1.5px solid #C9D2EC;" style-hover="background:#EAEEFB">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+            Llamar: 3471-595464
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:1.5fr 1fr; gap:24px; margin-top:36px; align-items:start; {{ detGrid }}">
+      <div>
+        <h2 style="font-family:'Sora',sans-serif; font-weight:700; font-size:23px; color:#101F40; margin:0 0 12px;">Descripción</h2>
+        <p style="font-size:16px; line-height:1.7; color:#414960; margin:0; text-wrap:pretty;">{{ sel.desc }}</p>
+
+        <h2 style="font-family:'Sora',sans-serif; font-weight:700; font-size:23px; color:#101F40; margin:30px 0 14px;">Características</h2>
+        <div style="display:grid; grid-template-columns:repeat(2,1fr); gap:12px; {{ feat2 }}">
+          <sc-for list="{{ selFeatures }}" as="ft" hint-placeholder-count="6">
+            <div style="display:flex; align-items:center; gap:10px; background:#fff; border:1px solid #EEF1F6; border-radius:11px; padding:12px 14px;">
+              <span style="width:26px; height:26px; border-radius:7px; background:#EAEEFB; display:flex; align-items:center; justify-content:center; flex:0 0 auto;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+              </span>
+              <span style="font-size:14.5px; font-weight:600; color:#384663;">{{ ft }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <h2 style="font-family:'Sora',sans-serif; font-weight:700; font-size:23px; color:#101F40; margin:30px 0 14px;">Ubicación</h2>
+        <div style="position:relative; height:260px; border-radius:16px; overflow:hidden; border:1px solid #E6E9F0; background:linear-gradient(135deg,#EEF2FB 0%,#E3E9F6 100%);">
+          <svg width="100%" height="100%" style="position:absolute; inset:0; opacity:.5;"><defs><pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M38 0H0V38" fill="none" stroke="#C9D4EC" stroke-width="1" /></pattern></defs><rect width="100%" height="100%" fill="url(#grid)" /><path d="M-20 180 Q 300 120 620 200 T 1300 170" fill="none" stroke="#B7C5E6" stroke-width="6" /></svg>
+          <div style="position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); display:flex; flex-direction:column; align-items:center; gap:8px;">
+            <span style="width:46px; height:46px; border-radius:50%; background:#1B36A8; display:flex; align-items:center; justify-content:center; box-shadow:0 8px 20px rgba(27,54,168,.4); border:3px solid #fff;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" /></svg>
+            </span>
+          </div>
+          <div style="position:absolute; left:16px; bottom:16px; background:#fff; border-radius:11px; padding:11px 15px; box-shadow:0 6px 18px rgba(16,24,64,.14);">
+            <div style="font-size:13.5px; font-weight:700; color:#101F40;">{{ sel.address }}</div>
+            <div style="font-size:12.5px; color:#8A93A6; margin-top:2px;">{{ sel.loc }} · Ubicación aproximada</div>
+          </div>
+        </div>
+      </div>
+
+      <aside style="background:#fff; border:1px solid #E6E9F0; border-radius:18px; padding:24px; box-shadow:0 10px 30px rgba(16,24,64,.06);">
+        <h3 style="font-family:'Sora',sans-serif; font-weight:700; font-size:19px; color:#101F40; margin:0 0 4px;">Consultá por esta propiedad</h3>
+        <p style="font-size:13.5px; color:#8A93A6; margin:0 0 16px;">Te respondemos a la brevedad.</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <input type="text" placeholder="Nombre y apellido" style="width:100%; background:#F6F7FA; border:1px solid #E1E5EE; border-radius:10px; padding:12px 13px; font-family:'Manrope',sans-serif; font-size:14px; color:#1B2A4E; outline:none;" />
+          <input type="email" placeholder="Email" style="width:100%; background:#F6F7FA; border:1px solid #E1E5EE; border-radius:10px; padding:12px 13px; font-family:'Manrope',sans-serif; font-size:14px; color:#1B2A4E; outline:none;" />
+          <input type="tel" placeholder="Teléfono" style="width:100%; background:#F6F7FA; border:1px solid #E1E5EE; border-radius:10px; padding:12px 13px; font-family:'Manrope',sans-serif; font-size:14px; color:#1B2A4E; outline:none;" />
+          <textarea rows="3" placeholder="Hola, me interesa esta propiedad. Quisiera coordinar una visita." style="width:100%; background:#F6F7FA; border:1px solid #E1E5EE; border-radius:10px; padding:12px 13px; font-family:'Manrope',sans-serif; font-size:14px; color:#1B2A4E; outline:none; resize:vertical;"></textarea>
+          <button style="background:#1B36A8; color:#fff; border:none; font-family:'Manrope',sans-serif; font-weight:700; font-size:15px; padding:14px; border-radius:12px; cursor:pointer;" style-hover="background:#16308f">Enviar consulta</button>
+        </div>
+        <div style="display:flex; align-items:center; gap:12px; margin-top:20px; padding-top:18px; border-top:1px solid #EEF1F6;">
+          <span style="width:46px; height:46px; border-radius:50%; background:#101F40; color:#fff; display:flex; align-items:center; justify-content:center; flex:0 0 auto;">{{ logoSmall }}</span>
+          <div>
+            <div style="font-size:14.5px; font-weight:700; color:#101F40;">Equipo Arangue</div>
+            <div style="font-size:12.5px; color:#8A93A6;">Asesores · Matrícula COCIR 2601</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div style="margin-top:48px;">
+      <h2 style="font-family:'Sora',sans-serif; font-weight:800; font-size:28px; letter-spacing:-.02em; color:#101F40; margin:0 0 22px;">Propiedades similares</h2>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:24px; {{ grid3 }}">
+        <sc-for list="{{ similar }}" as="item" hint-placeholder-count="3">
+          <dc-import name="Property Card" item="{{ item }}" href="#/propiedad/{{ item.slug }}" hint-size="100%,430px"></dc-import>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="contacto" style="background:#0A1530; color:#C7CFE2;">
+    <div style="max-width:1240px; margin:0 auto; padding:60px 32px 30px; display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:40px; {{ secPad }} {{ footGrid }}">
+      <div>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span style="color:#fff; display:flex;">{{ logo }}</span>
+          <span style="display:flex; flex-direction:column; line-height:1;">
+            <span style="font-family:'Sora',sans-serif; font-weight:800; font-size:18px; letter-spacing:.06em; color:#fff;">ARANGUE</span>
+            <span style="font-weight:700; font-size:10px; letter-spacing:.34em; color:#7E91C7;">PROPIEDADES</span>
+          </span>
+        </div>
+        <p style="font-size:14px; line-height:1.6; color:#93A0C0; margin:18px 0 0; max-width:280px;">Inmobiliaria en Cañada de Gómez, Santa Fe. Operamos en toda la región con matrícula COCIR 2601.</p>
+      </div>
+      <div>
+        <h4 style="font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:#fff; margin:0 0 16px; letter-spacing:.04em;">Propiedades</h4>
+        <div style="display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <a href="#/propiedades" style="color:#93A0C0; text-decoration:none;" style-hover="color:#fff">Casas</a>
+          <a href="#/propiedades" style="color:#93A0C0; text-decoration:none;" style-hover="color:#fff">Departamentos</a>
+          <a href="#/propiedades" style="color:#93A0C0; text-decoration:none;" style-hover="color:#fff">Terrenos y lotes</a>
+          <a href="#/propiedades" style="color:#93A0C0; text-decoration:none;" style-hover="color:#fff">Campos y galpones</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:#fff; margin:0 0 16px; letter-spacing:.04em;">Empresa</h4>
+        <div style="display:flex; flex-direction:column; gap:11px; font-size:14px;">
+          <a href="#/" style="color:#93A0C0; text-decoration:none;" style-hover="color:#fff">Inicio</a>
+          <a href="#/#tasacion" style="color:#93A0C0; text-decoration:none;" style-hover="color:#fff">Tasaciones</a>
+          <a href="#/#zonas" style="color:#93A0C0; text-decoration:none;" style-hover="color:#fff">Zonas</a>
+          <a href="#/#contacto" style="color:#93A0C0; text-decoration:none;" style-hover="color:#fff">Publicá con nosotros</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:#fff; margin:0 0 16px; letter-spacing:.04em;">Contacto</h4>
+        <div style="display:flex; flex-direction:column; gap:13px; font-size:14px;">
+          <a href="tel:3471595464" style="display:flex; align-items:center; gap:9px; color:#fff; text-decoration:none; font-weight:700; font-size:16px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C8BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+            3471-595464
+          </a>
+          <span style="display:flex; align-items:center; gap:9px; color:#93A0C0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C8BFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1.2" fill="#5C8BFF" stroke="none" /></svg>
+            @aranguepropiedades
+          </span>
+          <span style="display:flex; align-items:center; gap:9px; color:#93A0C0;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="#5C8BFF"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z" /></svg>
+            Arangue Propiedades
+          </span>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,.08);">
+      <div style="max-width:1240px; margin:0 auto; padding:20px 32px; display:flex; align-items:center; justify-content:space-between; gap:16px; font-size:13px; color:#6F7CA0; {{ footBottom }}">
+        <span>© 2026 Arangue Propiedades · Matrícula COCIR 2601</span>
+        <span>Cañada de Gómez · Las Parejas · Armstrong · Rosario</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===================== SWITCHER ===================== -->
+  <div style="position:fixed; bottom:22px; left:50%; transform:translateX(-50%); z-index:100; background:rgba(16,24,54,.92); backdrop-filter:blur(12px); border:1px solid rgba(255,255,255,.12); border-radius:999px; padding:6px; display:flex; align-items:center; gap:4px; box-shadow:0 16px 40px rgba(0,0,0,.34);">
+    <span style="font-size:11.5px; font-weight:700; letter-spacing:.08em; color:#8FA0CF; text-transform:uppercase; padding:0 12px 0 14px;">Variante</span>
+    <button onClick="{{ showA }}" style="{{ btnA }}">A · Editorial</button>
+    <button onClick="{{ showB }}" style="{{ btnB }}">B · Inmersiva</button>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    variant: 'A',
+    route: { name: 'home', slug: null, anchor: null },
+    gi: 0,
+    hero: { op: 'Venta', tipo: '', zona: '', dorm: '', currency: 'USD', min: '', max: '' },
+    f: this.defaultFilters(),
+    vw: (typeof window !== 'undefined' ? window.innerWidth : 1200),
+    scrolled: false,
+    menuOpen: false,
+    showFilters: false,
+  };
+
+  defaultFilters() {
+    return { op: 'Venta', tipos: [], zonas: [], currency: 'USD', min: '', max: '', credito: false, dorm: 0, oport: false, verReservadas: true, verVendidas: true };
+  }
+
+  componentDidMount() {
+    this._h = () => this.sync();
+    window.addEventListener('hashchange', this._h);
+    this._resize = () => { if (this._raf) cancelAnimationFrame(this._raf); this._raf = requestAnimationFrame(() => this.setState({ vw: window.innerWidth })); };
+    window.addEventListener('resize', this._resize);
+    this._scroll = () => { const s = window.scrollY > 30; if (s !== this.state.scrolled) this.setState({ scrolled: s }); };
+    window.addEventListener('scroll', this._scroll, { passive: true });
+    this.sync();
+  }
+  componentWillUnmount() {
+    window.removeEventListener('hashchange', this._h);
+    window.removeEventListener('resize', this._resize);
+    window.removeEventListener('scroll', this._scroll);
+  }
+
+  sync = () => {
+    let h = (window.location.hash || '').replace(/^#/, '');
+    let anchor = null;
+    const i = h.indexOf('#');
+    if (i >= 0) { anchor = h.slice(i + 1); h = h.slice(0, i); }
+    const seg = h.replace(/^\//, '').split('/').filter(Boolean);
+    let route;
+    if (seg[0] === 'propiedades') route = { name: 'listado', slug: null, anchor: null };
+    else if (seg[0] === 'propiedad') route = { name: 'detalle', slug: seg[1] || null, anchor: null };
+    else route = { name: 'home', slug: null, anchor: anchor };
+    this.go(route);
+  };
+
+  go(route) {
+    this.setState({ route, gi: 0, menuOpen: false, showFilters: false }, () => {
+      requestAnimationFrame(() => {
+        if (route.anchor && route.name === 'home') {
+          const el = document.getElementById(route.anchor);
+          if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.pageYOffset - 78, behavior: 'smooth' });
+        } else {
+          window.scrollTo({ top: 0, left: 0 });
+        }
+      });
+    });
+  }
+
+  setHero = (patch) => this.setState((s) => ({ hero: { ...s.hero, ...patch } }));
+  onHeroTipo = (e) => this.setHero({ tipo: e.target.value });
+  onHeroZona = (e) => this.setHero({ zona: e.target.value });
+  onHeroDorm = (e) => this.setHero({ dorm: e.target.value });
+  onHeroCurrency = (e) => this.setHero({ currency: e.target.value });
+  onHeroMin = (e) => this.setHero({ min: e.target.value });
+  onHeroMax = (e) => this.setHero({ max: e.target.value });
+  setHeroVenta = () => this.setHero({ op: 'Venta' });
+  setHeroAlquiler = () => this.setHero({ op: 'Alquiler' });
+
+  buscarHero = () => {
+    const hh = this.state.hero;
+    const patch = {
+      op: hh.op,
+      tipos: hh.tipo ? [hh.tipo] : [],
+      zonas: hh.zona ? [hh.zona] : [],
+      currency: hh.currency || 'USD',
+      min: hh.min || '',
+      max: hh.max || '',
+      dorm: hh.dorm ? parseInt(hh.dorm, 10) : 0,
+    };
+    this.setState((s) => ({ f: { ...s.f, ...patch } }));
+    window.location.hash = '#/propiedades';
+  };
+
+  setF = (patch) => this.setState((s) => ({ f: { ...s.f, ...patch } }));
+  toggleArr = (key, val) => this.setState((s) => {
+    const a = s.f[key];
+    const n = a.includes(val) ? a.filter((x) => x !== val) : [...a, val];
+    return { f: { ...s.f, [key]: n } };
+  });
+  toggleOport = () => this.setState((s) => ({ f: { ...s.f, oport: !s.f.oport } }));
+  toggleCredito = () => this.setState((s) => ({ f: { ...s.f, credito: !s.f.credito } }));
+  toggleVerReservadas = () => this.setState((s) => ({ f: { ...s.f, verReservadas: !s.f.verReservadas } }));
+  toggleVerVendidas = () => this.setState((s) => ({ f: { ...s.f, verVendidas: !s.f.verVendidas } }));
+  setMin = (e) => this.setF({ min: e.target.value });
+  setMax = (e) => this.setF({ max: e.target.value });
+  clearF = () => this.setState({ f: this.defaultFilters() });
+  toggleMenu = () => this.setState((s) => ({ menuOpen: !s.menuOpen }));
+  closeMenu = () => this.setState({ menuOpen: false });
+  toggleFilters = () => this.setState((s) => ({ showFilters: !s.showFilters }));
+
+  img(id) { return 'https://images.unsplash.com/photo-' + id + '?auto=format&fit=crop&w=800&q=80'; }
+
+  get data() {
+    const img = (id) => this.img(id);
+    return [
+      { slug: 'casa-fisherton-moderna', title: 'Casa moderna con pileta', loc: 'Fisherton, Rosario', zona: 'Rosario', op: 'Venta', type: 'Casa', price: 'USD 285.000', priceNum: 285000, currency: 'USD', beds: 4, baths: 3, area: '320 m²', status: 'oportunidad', aptoCredito: false, address: 'Av. Eva Perón 8800', img: img('1568605114967-8130f3a36994'), desc: 'Excelente casa moderna en Fisherton sobre lote parquizado, con pileta, amplios ventanales y terminaciones de primera. Ideal para familia que busca confort y luz natural en uno de los barrios más buscados de Rosario.' },
+      { slug: 'departamento-puerto-norte', title: 'Departamento a estrenar', loc: 'Puerto Norte, Rosario', zona: 'Rosario', op: 'Venta', type: 'Departamento', price: 'USD 168.000', priceNum: 168000, currency: 'USD', beds: 2, baths: 2, area: '78 m²', status: 'nuevo', aptoCredito: true, address: 'Bv. Oroño 100', img: img('1600607687939-ce8a6c25118c'), desc: 'Departamento a estrenar en Puerto Norte con vista abierta, amenities de categoría y cochera cubierta. Apto crédito, listo para mudarse.' },
+      { slug: 'duplex-canada-gomez', title: 'Dúplex con jardín y cochera', loc: 'Cañada de Gómez', zona: 'Cañada de Gómez', op: 'Venta', type: 'Casa', price: 'USD 132.000', priceNum: 132000, currency: 'USD', beds: 3, baths: 2, area: '140 m²', status: 'reservado', aptoCredito: true, address: 'Calle San Martín 1450', img: this.img('1570129477492-45c003edd2be'), desc: 'Dúplex en zona residencial de Cañada de Gómez, con jardín al fondo, parrillero y cochera para dos autos. Muy buena distribución en dos plantas.' },
+      { slug: 'casa-centro-reciclada', title: 'Casa céntrica reciclada', loc: 'Cañada de Gómez', zona: 'Cañada de Gómez', op: 'Venta', type: 'Casa', price: 'USD 95.000', priceNum: 95000, currency: 'USD', beds: 3, baths: 1, area: '160 m²', status: 'vendido', aptoCredito: true, address: 'Calle Belgrano 760', img: this.img('1564013799919-ab600027ffc6'), desc: 'Casa antigua totalmente reciclada en pleno centro, conservando detalles originales con confort actual. A pasos de comercios y servicios.' },
+      { slug: 'lote-barrio-cerrado', title: 'Lote en barrio cerrado', loc: 'Las Parejas', zona: 'Las Parejas', op: 'Venta', type: 'Terreno', price: 'USD 48.000', priceNum: 48000, currency: 'USD', beds: 0, baths: 0, area: '600 m²', status: 'oportunidad', aptoCredito: false, address: 'Barrio Los Robles, lote 24', img: this.img('1416879595882-3373a0480b5b'), desc: 'Lote de 600 m² en barrio cerrado con seguridad, espacios verdes y todos los servicios. Excelente oportunidad para construir tu casa.' },
+      { slug: 'campo-agricola-carcarana', title: 'Campo agrícola — 12 ha', loc: 'Carcarañá', zona: 'Carcarañá', op: 'Venta', type: 'Campo', price: 'USD 480.000', priceNum: 480000, currency: 'USD', beds: 0, baths: 0, area: '12 ha', status: 'nuevo', aptoCredito: false, address: 'Ruta 9, km 372', img: this.img('1500382017468-9049fed747ef'), desc: 'Campo agrícola de 12 hectáreas con excelente aptitud y acceso pavimentado. Ideal para inversión o explotación propia.' },
+      { slug: 'galpon-armstrong', title: 'Galpón industrial', loc: 'Armstrong', zona: 'Armstrong', op: 'Venta', type: 'Galpón', price: 'USD 210.000', priceNum: 210000, currency: 'USD', beds: 0, baths: 0, area: '800 m²', status: '', aptoCredito: false, address: 'Parque Industrial Armstrong', img: this.img('1518780664697-55e3ad937233'), desc: 'Galpón de 800 m² cubiertos en parque industrial, con oficina interna, energía trifásica y amplia playa de maniobras para camiones.' },
+      { slug: 'local-centro-rosario', title: 'Local comercial a la calle', loc: 'Centro, Rosario', zona: 'Rosario', op: 'Alquiler', type: 'Local', price: 'ARS 850.000 /mes', priceNum: 850000, currency: 'ARS', beds: 0, baths: 1, area: '95 m²', status: '', aptoCredito: false, address: 'Córdoba 1200', img: this.img('1600607687939-ce8a6c25118c'), desc: 'Local comercial sobre peatonal, con gran vidriera y excelente circulación. Apto gastronómico o comercial.' },
+      { slug: 'depto-alquiler-canada', title: 'Departamento 2 ambientes', loc: 'Cañada de Gómez', zona: 'Cañada de Gómez', op: 'Alquiler', type: 'Departamento', price: 'ARS 480.000 /mes', priceNum: 480000, currency: 'ARS', beds: 2, baths: 1, area: '60 m²', status: '', aptoCredito: false, address: 'Calle Rivadavia 540', img: this.img('1493809842364-78817add7ffb'), desc: 'Departamento de 2 ambientes en planta alta, luminoso y en excelente estado. A metros de la plaza principal.' },
+      { slug: 'casa-las-parejas', title: 'Casa familiar con quincho', loc: 'Las Parejas', zona: 'Las Parejas', op: 'Venta', type: 'Casa', price: 'USD 158.000', priceNum: 158000, currency: 'USD', beds: 3, baths: 2, area: '180 m²', status: '', aptoCredito: true, address: 'Calle 9 de Julio 320', img: this.img('1512917774080-9991f1c4c750'), desc: 'Casa familiar en barrio tranquilo, con quincho con parrilla, patio amplio y cochera. Lista para habitar.' },
+      { slug: 'casa-quinta-canada', title: 'Casa quinta con parque', loc: 'Cañada de Gómez', zona: 'Cañada de Gómez', op: 'Venta', type: 'Casa', price: 'USD 320.000', priceNum: 320000, currency: 'USD', beds: 4, baths: 3, area: '450 m²', status: 'oportunidad', aptoCredito: false, address: 'Camino a Carrizales s/n', img: this.img('1568605114967-8130f3a36994'), desc: 'Casa quinta sobre terreno de gran parque con árboles añosos, pileta y galería. Ideal para descanso o vivienda permanente a minutos del centro.' },
+      { slug: 'terreno-villa-carlos-paz', title: 'Terreno con vista a las sierras', loc: 'Villa Carlos Paz', zona: 'Villa Carlos Paz', op: 'Venta', type: 'Terreno', price: 'USD 65.000', priceNum: 65000, currency: 'USD', beds: 0, baths: 0, area: '800 m²', status: 'nuevo', aptoCredito: false, address: 'Barrio Las Cumbres', img: this.img('1416879595882-3373a0480b5b'), desc: 'Terreno en altura con vista panorámica a las sierras, en zona de gran desarrollo. Servicios disponibles.' },
+    ];
+  }
+
+  get featuresByType() {
+    return {
+      Casa: ['Cochera para 2 autos', 'Patio con parrilla', 'Cocina integrada', 'Lavadero independiente', 'Aire acondicionado', 'Pileta'],
+      Departamento: ['Balcón aterrazado', 'Cochera cubierta', 'Seguridad 24 hs', 'Cocina equipada', 'Ascensor', 'Bajas expensas'],
+      Terreno: ['Apto construcción', 'Servicios en el frente', 'Escritura al día', 'Mensura aprobada'],
+      Campo: ['Apto agrícola', 'Acceso pavimentado', 'Molino y aguada', 'Alambrado perimetral', 'Galpón de chapa'],
+      'Galpón': ['Portón para camión', 'Oficina interna', 'Energía trifásica', 'Playa de maniobras'],
+      Local: ['Vidriera a la calle', 'Baño completo', 'Apto gastronómico', 'Excelente ubicación'],
+    };
+  }
+
+  logoEl(size) {
+    return React.createElement('svg', { width: size, height: size, viewBox: '0 0 100 100', fill: 'currentColor', 'aria-label': 'Arangue' },
+      React.createElement('rect', { x: 45, y: 6, width: 9, height: 27, rx: 1 }),
+      React.createElement('path', { fillRule: 'evenodd', d: 'M9 74 L49 19 L91 74 Z M31 70 L43 45 L55 70 Z' }),
+      React.createElement('rect', { x: 33, y: 60, width: 22, height: 6, rx: 1 }),
+      React.createElement('rect', { x: 14, y: 79, width: 72, height: 6, rx: 2 })
+    );
+  }
+
+  renderVals() {
+    const isA = this.state.variant === 'A';
+    const isB = this.state.variant === 'B';
+    const route = this.state.route;
+    const f = this.state.f;
+    const ALL = this.data;
+
+    // responsive
+    const vw = this.state.vw || 1200;
+    const isMobile = vw < 880;
+    const isPhone = vw < 600;
+    const navH = isPhone ? 58 : 68;
+    const scrolled = this.state.scrolled;
+
+    // nav (fixed on all routes)
+    const overHero = isB && route.name === 'home';
+    const navTransparent = overHero && !scrolled && !this.state.menuOpen;
+    const aNavBg = 'linear-gradient(95deg,#142C8C 0%, #1B36A8 52%, #2348C4 100%)';
+    const navBg = isA ? aNavBg : (navTransparent ? 'transparent' : '#0A1530');
+    const navBorder = navTransparent ? '1px solid transparent' : (isA ? '1px solid rgba(255,255,255,.10)' : '1px solid rgba(255,255,255,.08)');
+    const navStyle = 'position:fixed; top:0; left:0; right:0; z-index:60; backdrop-filter:blur(14px); background:' + navBg + '; border-bottom:' + navBorder + '; transition:background .3s ease, border-color .3s ease;';
+    const needSpacer = !overHero;
+    const aSpacerBg = route.name === 'listado' ? '#FFFFFF' : (route.name === 'home' ? '#E9EEFE' : '#F6F7FA');
+    const spacerStyle = needSpacer ? ('height:' + navH + 'px; background:' + (isA ? aSpacerBg : '#0A1530') + ';') : 'display:none;';
+    const baseLink = isA ? 'rgba(255,255,255,.82)' : 'rgba(255,255,255,.86)';
+    const strong = '#fff';
+    const mk = (active) => 'color:' + (active ? strong : baseLink) + '; font-weight:' + (active ? '700' : '600') + ';';
+    const menuBg = isA ? '#FFFFFF' : '#0A1530';
+    const menuLinkColor = isA ? '#1B2A4E' : 'rgba(255,255,255,.92)';
+    const menuDivider = isA ? '#F0F2F7' : 'rgba(255,255,255,.08)';
+
+    // hero tab styles
+    const tabBase = "flex:0 0 auto; border:none; font-family:'Manrope',sans-serif; font-weight:700; font-size:13.5px; padding:8px 18px; border-radius:9px; cursor:pointer;";
+    const hop = this.state.hero.op;
+
+    // filter chip styles
+    const chipBase = "font-family:'Manrope',sans-serif; cursor:pointer; font-weight:700; font-size:13px; padding:9px 6px; border-radius:10px; transition:all .15s;";
+    const chip = (on) => chipBase + (on ? 'background:#1B36A8; color:#fff; border:1px solid #1B36A8;' : 'background:#fff; color:#414960; border:1px solid #E1E5EE;');
+    const boxBase = "width:19px; height:19px; border-radius:6px; display:flex; align-items:center; justify-content:center; flex:0 0 auto; transition:all .15s;";
+    const cbox = (on) => boxBase + (on ? 'background:#1B36A8; border:1px solid #1B36A8;' : 'background:#fff; border:1.5px solid #CBD3E1;');
+    const curBase = "font-family:'Manrope',sans-serif; cursor:pointer; font-weight:700; font-size:12px; padding:5px 11px; border-radius:7px; border:none; transition:all .15s;";
+
+    const TYPES = ['Casa', 'Departamento', 'Terreno', 'Campo', 'Galpón', 'Local'];
+    const ZONAS = ['Cañada de Gómez', 'Rosario', 'Las Parejas', 'Armstrong', 'Carcarañá', 'Villa Carlos Paz'];
+
+    // filtering
+    const num = (x) => { const n = parseFloat(x); return isNaN(n) ? null : n; };
+    const fmin = num(f.min), fmax = num(f.max);
+    const filtered = ALL.filter((p) => {
+      if (p.op !== f.op) return false;
+      if (f.tipos.length && !f.tipos.includes(p.type)) return false;
+      if (f.zonas.length && !f.zonas.includes(p.zona)) return false;
+      if (f.credito && !p.aptoCredito) return false;
+      if (f.dorm && (p.beds || 0) < f.dorm) return false;
+      if (f.oport && p.status !== 'oportunidad') return false;
+      if (!f.verReservadas && p.status === 'reservado') return false;
+      if (!f.verVendidas && p.status === 'vendido') return false;
+      if (fmin !== null || fmax !== null) {
+        if (p.currency !== f.currency) return false;
+        if (fmin !== null && p.priceNum < fmin) return false;
+        if (fmax !== null && p.priceNum > fmax) return false;
+      }
+      return true;
+    });
+
+    // detalle
+    const sel = ALL.find((p) => p.slug === route.slug) || ALL[0];
+    const INTERIORS = [this.img('1493809842364-78817add7ffb'), this.img('1600607687939-ce8a6c25118c'), this.img('1512917774080-9991f1c4c750'), this.img('1564013799919-ab600027ffc6')];
+    let gallery = [sel.img].concat(INTERIORS);
+    gallery = gallery.filter((v, i, a) => a.indexOf(v) === i).slice(0, 5);
+    const gi = Math.min(this.state.gi || 0, gallery.length - 1);
+    const thumbs = gallery.map((src, i) => ({ src, set: () => this.setState({ gi: i }), border: i === gi ? 'border-color:#1B36A8;' : 'border-color:transparent;' }));
+    const selSpecs = [];
+    if (sel.beds) selSpecs.push({ value: sel.beds, label: 'Dormitorios' });
+    if (sel.baths) selSpecs.push({ value: sel.baths, label: 'Baños' });
+    selSpecs.push({ value: sel.area, label: 'Superficie' });
+    const stMap = {
+      oportunidad: { label: 'Oportunidad', bg: 'linear-gradient(135deg,#FF4438,#C81E14)', color: '#fff' },
+      nuevo: { label: 'Nuevo ingreso', bg: '#0E9F6E', color: '#fff' },
+      reservado: { label: 'Reservado', bg: '#F59E0B', color: '#3A2A00' },
+      vendido: { label: 'Vendido', bg: 'rgba(40,46,58,.92)', color: '#E6E8EE' },
+    };
+    const stm = stMap[sel.status];
+    const detailBadgeStyle = stm
+      ? "position:absolute; top:14px; left:14px; font-family:'Manrope',sans-serif; font-size:12.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:7px 13px; border-radius:999px; background:" + stm.bg + "; color:" + stm.color + "; box-shadow:0 5px 16px rgba(16,24,64,.2);"
+      : 'display:none;';
+    let similar = ALL.filter((p) => p.slug !== sel.slug && (p.type === sel.type || p.zona === sel.zona)).slice(0, 3);
+    if (similar.length < 3) {
+      const extra = ALL.filter((p) => p.slug !== sel.slug && similar.indexOf(p) === -1).slice(0, 3 - similar.length);
+      similar = similar.concat(extra);
+    }
+
+    const sw = 'font-family:Manrope,sans-serif; border:none; cursor:pointer; font-weight:700; font-size:13px; padding:9px 16px; border-radius:999px; transition:opacity .2s;';
+
+    return {
+      // global
+      isA, isB,
+      isHome: route.name === 'home',
+      isListado: route.name === 'listado',
+      isDetalle: route.name === 'detalle',
+      logo: this.logoEl(38),
+      logoSmall: this.logoEl(24),
+
+      // nav
+      navStyle,
+      logoColor: '#fff',
+      brandColor: '#fff',
+      brandSub: isA ? '#AFC1F0' : '#9DB1E8',
+      lkInicio: mk(route.name === 'home'),
+      lkProp: mk(route.name === 'listado' || route.name === 'detalle'),
+      lkZonas: mk(false), lkTasa: mk(false), lkContacto: mk(false),
+      ctaStyle: isA ? 'background:#fff;color:#1B36A8;' : 'background:#fff;color:#15233F;',
+      phoneColor: '#fff',
+      phoneIcon: isA ? '#AFC1F0' : '#5C8BFF',
+
+      // responsive / nav
+      spacerStyle,
+      menuOpen: this.state.menuOpen,
+      showFilters: this.state.showFilters,
+      toggleMenu: this.toggleMenu,
+      closeMenu: this.closeMenu,
+      toggleFilters: this.toggleFilters,
+      hambStyle: 'display:' + (isMobile ? 'flex' : 'none') + '; align-items:center; justify-content:center; width:42px; height:42px; border:none; background:none; cursor:pointer; padding:0;',
+      hambColor: '#fff',
+      navLinksHide: isMobile ? 'display:none;' : '',
+      navRightHide: isMobile ? 'display:none;' : '',
+      menuPanelStyle: 'position:fixed; top:' + navH + 'px; left:0; right:0; z-index:59; background:' + menuBg + '; border-bottom:1px solid ' + menuDivider + '; padding:12px 18px 18px; display:flex; flex-direction:column; box-shadow:0 18px 40px rgba(8,16,40,.18);',
+      menuLinkStyle: 'padding:13px 6px; font-family:Manrope,sans-serif; font-size:16px; font-weight:700; text-decoration:none; color:' + menuLinkColor + '; border-bottom:1px solid ' + menuDivider + ';',
+      menuCtaStyle: 'margin-top:14px; text-align:center; padding:14px; border-radius:12px; font-family:Manrope,sans-serif; font-weight:700; font-size:15px; text-decoration:none; ' + (isA ? 'background:#1B36A8; color:#fff;' : 'background:#fff; color:#15233F;'),
+      menuPhoneStyle: 'margin-top:12px; display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:12px; font-family:Manrope,sans-serif; font-weight:700; font-size:15px; text-decoration:none; border:1px solid ' + (isA ? '#C9D2EC' : 'rgba(255,255,255,.2)') + '; color:' + (isA ? '#1B36A8' : '#fff') + ';',
+
+      // layout overrides
+      heroAGrid: isMobile ? 'grid-template-columns:1fr;' : '',
+      heroAPad: isPhone ? 'padding:24px 18px 28px;' : (isMobile ? 'padding:32px 22px 30px;' : ''),
+      heroAImgHide: isMobile ? 'display:none;' : '',
+      heroAH1: isPhone ? 'font-size:34px;' : (isMobile ? 'font-size:44px;' : ''),
+      heroBPad: isPhone ? 'padding:92px 18px 76px;' : (isMobile ? 'padding:104px 24px 82px;' : ''),
+      heroBH1: isPhone ? 'font-size:34px;' : (isMobile ? 'font-size:44px;' : ''),
+      searchRow1: isPhone ? 'grid-template-columns:1fr 1fr;' : '',
+      searchRow2: isPhone ? 'grid-template-columns:1fr 1fr;' : '',
+      secPad: isPhone ? 'padding-left:18px; padding-right:18px;' : '',
+      trustGrid: isPhone ? 'grid-template-columns:repeat(2,1fr); gap:18px;' : '',
+      grid3: isPhone ? 'grid-template-columns:1fr;' : (isMobile ? 'grid-template-columns:repeat(2,1fr);' : ''),
+      featHead: isPhone ? 'flex-direction:column; align-items:flex-start; gap:14px;' : '',
+      tasaGrid: isMobile ? 'grid-template-columns:1fr; gap:24px;' : '',
+      tasaPad: isPhone ? 'padding:30px 22px;' : (isMobile ? 'padding:40px 32px;' : ''),
+      footGrid: isMobile ? 'grid-template-columns:1fr 1fr; gap:28px;' : '',
+      footBottom: isPhone ? 'flex-direction:column; align-items:flex-start; gap:8px;' : '',
+      listBodyResp: isMobile ? 'grid-template-columns:1fr;' : '',
+      asideResp: isMobile ? (this.state.showFilters ? 'position:static; top:auto;' : 'display:none;') : '',
+      filtToggleStyle: 'display:' + (isMobile ? 'flex' : 'none') + '; align-items:center; justify-content:center; gap:8px; width:100%; margin-bottom:16px; background:#fff; border:1px solid #E1E5EE; border-radius:12px; padding:13px; font-family:Manrope,sans-serif; font-weight:700; font-size:14.5px; color:#1B36A8; cursor:pointer;',
+      filtToggleLabel: this.state.showFilters ? 'Ocultar filtros' : 'Mostrar filtros',
+      detGrid: isMobile ? 'grid-template-columns:1fr;' : '',
+      detSticky: isMobile ? 'position:static; top:auto;' : '',
+      feat2: isPhone ? 'grid-template-columns:1fr;' : '',
+
+      // hero search
+      hero: this.state.hero,
+      setHeroVenta: this.setHeroVenta,
+      setHeroAlquiler: this.setHeroAlquiler,
+      heroVentaStyle: tabBase + (hop === 'Venta' ? 'background:#1B36A8;color:#fff;' : 'background:transparent;color:#56607A;'),
+      heroAlquilerStyle: tabBase + (hop === 'Alquiler' ? 'background:#1B36A8;color:#fff;' : 'background:transparent;color:#56607A;'),
+      onHeroTipo: this.onHeroTipo, onHeroZona: this.onHeroZona, onHeroDorm: this.onHeroDorm,
+      onHeroCurrency: this.onHeroCurrency, onHeroMin: this.onHeroMin, onHeroMax: this.onHeroMax,
+      buscarHero: this.buscarHero,
+
+      // home content
+      stats: [
+        { value: '+250', label: 'Propiedades activas' },
+        { value: '6', label: 'Localidades' },
+        { value: '2601', label: 'Matrícula COCIR' },
+        { value: '100%', label: 'Tasaciones sin cargo' },
+      ],
+      featured: ALL.slice(0, 6),
+      zonas: [
+        { name: 'Cañada de Gómez', count: '48 propiedades', img: this.img('1564013799919-ab600027ffc6') },
+        { name: 'Rosario', count: '63 propiedades', img: this.img('1518780664697-55e3ad937233') },
+        { name: 'Las Parejas', count: '21 propiedades', img: this.img('1570129477492-45c003edd2be') },
+        { name: 'Armstrong', count: '17 propiedades', img: this.img('1512917774080-9991f1c4c750') },
+        { name: 'Carcarañá', count: '14 propiedades', img: this.img('1500382017468-9049fed747ef') },
+        { name: 'Villa Carlos Paz', count: '9 propiedades', img: this.img('1600607687939-ce8a6c25118c') },
+      ],
+
+      // filters
+      clearF: this.clearF,
+      toggleOport: this.toggleOport,
+      oportCount: ALL.filter((p) => p.status === 'oportunidad').length,
+      oportBtnStyle: "display:flex; align-items:center; justify-content:space-between; width:100%; font-family:'Manrope',sans-serif; font-weight:800; font-size:13.5px; letter-spacing:.02em; padding:11px 14px; border-radius:12px; cursor:pointer; transition:all .15s; " + (f.oport ? 'background:linear-gradient(135deg,#FF4438,#C81E14); color:#fff; border:1.5px solid transparent; box-shadow:0 6px 16px rgba(200,30,20,.32);' : 'background:#FFF3F2; color:#C81E14; border:1.5px solid #FAD3CF;'),
+      opOptions: ['Venta', 'Alquiler'].map((o) => ({ name: o, style: chip(f.op === o), set: () => this.setF({ op: o }) })),
+      tipoOptions: TYPES.map((t) => ({ name: t, on: f.tipos.includes(t), box: cbox(f.tipos.includes(t)), count: ALL.filter((p) => p.type === t).length, toggle: () => this.toggleArr('tipos', t) })),
+      zonaOptions: ZONAS.map((z) => ({ name: z, on: f.zonas.includes(z), box: cbox(f.zonas.includes(z)), count: ALL.filter((p) => p.zona === z).length, toggle: () => this.toggleArr('zonas', z) })),
+      setUSD: () => this.setF({ currency: 'USD' }),
+      setARS: () => this.setF({ currency: 'ARS' }),
+      usdStyle: curBase + (f.currency === 'USD' ? 'background:#1B36A8;color:#fff;' : 'background:transparent;color:#697287;'),
+      arsStyle: curBase + (f.currency === 'ARS' ? 'background:#1B36A8;color:#fff;' : 'background:transparent;color:#697287;'),
+      f,
+      setMin: this.setMin, setMax: this.setMax,
+      dormOptions: [{ l: 'Todos', v: 0 }, { l: '1+', v: 1 }, { l: '2+', v: 2 }, { l: '3+', v: 3 }, { l: '4+', v: 4 }].map((o) => ({ label: o.l, style: chip(f.dorm === o.v), set: () => this.setF({ dorm: o.v }) })),
+      toggleCredito: this.toggleCredito,
+      creditoTrack: 'position:relative; width:40px; height:23px; border-radius:999px; flex:0 0 auto; transition:background .2s; background:' + (f.credito ? '#1B36A8' : '#CBD3E1') + ';',
+      creditoKnob: 'position:absolute; top:3px; left:' + (f.credito ? '20px' : '3px') + '; width:17px; height:17px; border-radius:50%; background:#fff; transition:left .2s; box-shadow:0 1px 3px rgba(0,0,0,.2);',
+      toggleVerReservadas: this.toggleVerReservadas,
+      toggleVerVendidas: this.toggleVerVendidas,
+      verReservadas: f.verReservadas,
+      verVendidas: f.verVendidas,
+      resBox: cbox(f.verReservadas),
+      venBox: cbox(f.verVendidas),
+      filtered,
+      resultCount: filtered.length,
+      hasResults: filtered.length > 0,
+      noResults: filtered.length === 0,
+
+      // detalle
+      sel,
+      mainImg: gallery[gi],
+      thumbs,
+      selSpecs,
+      detailBadgeStyle,
+      detailBadgeLabel: stm ? stm.label : '',
+      selFeatures: this.featuresByType[sel.type] || [],
+      similar,
+
+      // switcher
+      showA: () => this.setState({ variant: 'A' }),
+      showB: () => this.setState({ variant: 'B' }),
+      btnA: sw + (isA ? 'background:#fff; color:#15233F;' : 'background:transparent; color:rgba(255,255,255,.7);'),
+      btnB: sw + (isB ? 'background:#fff; color:#15233F;' : 'background:transparent; color:rgba(255,255,255,.7);'),
+    };
+  }
+}
+</script>
+</body>
+</html>

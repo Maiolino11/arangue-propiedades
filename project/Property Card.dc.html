@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<a href="{{ href }}" style="display:flex; flex-direction:column; text-decoration:none; color:inherit; background:#ffffff; border:1px solid #E8EBF1; border-radius:18px; overflow:hidden; box-shadow:0 1px 2px rgba(16,24,64,.05); transition:box-shadow .28s ease, transform .28s ease; font-family:'Manrope',sans-serif;" style-hover="box-shadow:0 20px 44px rgba(16,24,64,.16); transform:translateY(-4px)">
+  <div style="position:relative; aspect-ratio:16/10; background:#EEF1F6; overflow:hidden;">
+    <img src="{{ item.img }}" alt="{{ item.title }}" loading="lazy" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;" style-hover="transform:scale(1.05)" />
+    <span style="position:absolute; top:12px; right:12px; background:rgba(255,255,255,.94); backdrop-filter:blur(6px); color:#1B2A4E; font-size:11.5px; font-weight:700; letter-spacing:.02em; padding:5px 11px; border-radius:999px;">{{ item.type }}</span>
+
+    <sc-if value="{{ isOportunidad }}" hint-placeholder-val="{{ false }}">
+      <span style="position:absolute; top:12px; left:12px; display:inline-flex; align-items:center; gap:5px; background:linear-gradient(135deg,#FF4438,#C81E14); color:#fff; font-size:11.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:6px 11px 6px 8px; border-radius:999px; box-shadow:0 5px 16px rgba(200,30,20,.5); border:1.5px solid rgba(255,255,255,.6);">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M13 2 4 14h6l-1 8 9-12h-6z" /></svg>
+        Oportunidad
+      </span>
+    </sc-if>
+    <sc-if value="{{ isNuevo }}" hint-placeholder-val="{{ false }}">
+      <span style="position:absolute; top:12px; left:12px; display:inline-flex; align-items:center; gap:5px; background:#0E9F6E; color:#fff; font-size:11.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:6px 11px; border-radius:999px; box-shadow:0 4px 12px rgba(14,159,110,.4);">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2l2.4 6.9H22l-6 4.4 2.3 7-6.3-4.5L5.7 20.3 8 13.3 2 8.9h7.6z" /></svg>
+        Nuevo ingreso
+      </span>
+    </sc-if>
+    <sc-if value="{{ isReservado }}" hint-placeholder-val="{{ false }}">
+      <span style="position:absolute; top:12px; left:12px; display:inline-flex; align-items:center; gap:5px; background:#F59E0B; color:#3A2A00; font-size:11.5px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; padding:6px 11px; border-radius:999px; box-shadow:0 4px 12px rgba(245,158,11,.35);">
+        Reservado
+      </span>
+    </sc-if>
+    <sc-if value="{{ isVendido }}" hint-placeholder-val="{{ false }}">
+      <span style="position:absolute; top:12px; left:12px; display:inline-flex; align-items:center; gap:5px; background:rgba(40,46,58,.92); backdrop-filter:blur(4px); color:#E6E8EE; font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; padding:6px 11px; border-radius:999px;">
+        Vendido
+      </span>
+    </sc-if>
+  </div>
+
+  <div style="padding:17px 18px 19px; display:flex; flex-direction:column; gap:9px; flex:1;">
+    <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
+      <span style="font-family:'Sora',sans-serif; font-size:20px; font-weight:700; color:#0E1B3D; letter-spacing:-.01em;">{{ item.price }}</span>
+      <span style="font-size:12px; font-weight:600; color:#8A93A6;">{{ item.op }}</span>
+    </div>
+    <h3 style="margin:0; font-family:'Sora',sans-serif; font-size:16px; font-weight:600; color:#1B2A4E; line-height:1.3;">{{ item.title }}</h3>
+    <div style="display:flex; align-items:center; gap:6px; color:#697287; font-size:13.5px;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z" /><circle cx="12" cy="10" r="3" /></svg>
+      {{ item.loc }}
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; margin-top:6px; padding-top:13px; border-top:1px solid #EEF1F6; color:#41496097; font-size:13px; color:#414960;">
+      <sc-if value="{{ hasBeds }}" hint-placeholder-val="{{ true }}">
+        <span style="display:inline-flex; align-items:center; gap:6px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6478" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 17v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5" /><path d="M2 17h20M4 12V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4M2 17v3M22 17v3" /></svg>
+          {{ item.beds }}
+        </span>
+      </sc-if>
+      <sc-if value="{{ hasBaths }}" hint-placeholder-val="{{ true }}">
+        <span style="display:inline-flex; align-items:center; gap:6px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6478" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12V5a2 2 0 0 1 2-2 2 2 0 0 1 2 2M4 12h16a1 1 0 0 1 1 1v2a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-2a1 1 0 0 1 1-1zM6 19l-1 2M19 19l1 2" /></svg>
+          {{ item.baths }}
+        </span>
+      </sc-if>
+      <span style="display:inline-flex; align-items:center; gap:6px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B6478" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 3 3 21M21 9V3h-6M3 15v6h6" /></svg>
+        {{ item.area }}
+      </span>
+    </div>
+  </div>
+</a>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:380,&quot;height&quot;:430},&quot;item&quot;:{&quot;editor&quot;:null,&quot;default&quot;:{&quot;title&quot;:&quot;Casa moderna en Fisherton&quot;,&quot;loc&quot;:&quot;Fisherton, Rosario&quot;,&quot;price&quot;:&quot;USD 285.000&quot;,&quot;op&quot;:&quot;Venta&quot;,&quot;beds&quot;:4,&quot;baths&quot;:3,&quot;area&quot;:&quot;320 m²&quot;,&quot;type&quot;:&quot;Casa&quot;,&quot;status&quot;:&quot;oportunidad&quot;,&quot;img&quot;:&quot;https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&amp;fit=crop&amp;w=800&amp;q=80&quot;}},&quot;href&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;#&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const item = this.props.item || {};
+    const s = item.status || '';
+    return {
+      item,
+      href: this.props.href || '#',
+      isOportunidad: s === 'oportunidad',
+      isNuevo: s === 'nuevo',
+      isReservado: s === 'reservado',
+      isVendido: s === 'vendido',
+      hasBeds: (item.beds || 0) > 0,
+      hasBaths: (item.baths || 0) > 0,
+    };
+  }
+}
+</script>
+</body>
+</html>
