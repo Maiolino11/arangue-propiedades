@@ -1,0 +1,100 @@
+.ar-search__tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 13px;
+}
+.ar-search__tab {
+  flex: 0 0 auto;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 13.5px;
+  padding: 8px 18px;
+  border-radius: 9px;
+  cursor: pointer;
+  background: transparent;
+  color: #56607A;
+}
+.ar-search__tab.is-active {
+  background: var(--c-blue);
+  color: #fff;
+}
+
+.ar-search__row1 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+}
+.ar-search__row2 {
+  display: grid;
+  grid-template-columns: 84px 1fr 1fr auto;
+  gap: 10px;
+  margin-top: 10px;
+}
+@media (max-width: 599.98px) {
+  .ar-search__row1, .ar-search__row2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.ar-search__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  border-radius: 11px;
+  padding: 9px 13px;
+}
+.ar-search__field label,
+.ar-search__field span.ar-search__label {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .05em;
+  color: var(--c-muted3);
+  text-transform: uppercase;
+}
+.ar-search__field select,
+.ar-search__field input {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--c-text);
+  cursor: pointer;
+  padding: 0;
+}
+.ar-search__field input {
+  cursor: text;
+}
+.ar-search__field input::placeholder {
+  color: var(--c-text);
+  opacity: .55;
+}
+
+.ar-search__submit {
+  background: var(--c-blue);
+  color: #fff;
+  border: none;
+  border-radius: 11px;
+  padding: 0 22px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 8px 18px rgba(27, 54, 168, .28);
+  transition: background .2s;
+}
+.ar-search__submit:hover { background: var(--c-blue-dark); }
+
+@media (max-width: 599.98px) {
+  .ar-search__submit { grid-column: span 2; justify-content: center; padding: 12px; }
+}
