@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Logo from './Logo.jsx';
-import NavAnchor from './NavAnchor.jsx';
 import { whatsappLink } from '../data/site.js';
 import './Header.css';
 
@@ -53,7 +52,6 @@ export default function Header() {
             <Link to="/" className={`ar-header__link${isHome ? ' is-active' : ''}`}>Inicio</Link>
             <Link to="/propiedades" className={`ar-header__link${isListado ? ' is-active' : ''}`}>Propiedades</Link>
             <Link to="/empresa" className={`ar-header__link${isEmpresa ? ' is-active' : ''}`}>Empresa</Link>
-            <NavAnchor id="zonas" className="ar-header__link">Zonas</NavAnchor>
             <Link to="/tasaciones" className={`ar-header__link${isTasaciones ? ' is-active' : ''}`}>Tasaciones</Link>
             <Link to="/contacto" className={`ar-header__link${isContacto ? ' is-active' : ''}`}>Contacto</Link>
           </div>
@@ -78,7 +76,6 @@ export default function Header() {
           <Link to="/" onClick={closeMenu} className="ar-mobile-menu__link">Inicio</Link>
           <Link to="/propiedades" onClick={closeMenu} className="ar-mobile-menu__link">Propiedades</Link>
           <Link to="/empresa" onClick={closeMenu} className="ar-mobile-menu__link">Empresa</Link>
-          <NavAnchor id="zonas" onClick={closeMenu} className="ar-mobile-menu__link">Zonas</NavAnchor>
           <Link to="/tasaciones" onClick={closeMenu} className="ar-mobile-menu__link">Tasaciones</Link>
           <Link to="/contacto" onClick={closeMenu} className="ar-mobile-menu__link">Contacto</Link>
           <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" onClick={closeMenu} className="ar-mobile-menu__cta">
