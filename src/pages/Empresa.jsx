@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import PageHeader from '../components/PageHeader.jsx';
-import { STATS, ZONA_NAMES } from '../data/properties.js';
+import { ZONA_NAMES } from '../data/properties.js';
 import './Empresa.css';
 
 const VALUES = [
@@ -42,17 +42,6 @@ export default function Empresa() {
             asesorando tanto a quienes buscan su próxima propiedad como a quienes
             necesitan vender, alquilar o tasar la suya.
           </p>
-        </div>
-      </section>
-
-      <section className="ar-trust">
-        <div className="ar-trust__grid">
-          {STATS.map((st) => (
-            <div className="ar-trust__item" key={st.label}>
-              <div className="ar-trust__value">{st.value}</div>
-              <div className="ar-trust__label">{st.label}</div>
-            </div>
-          ))}
         </div>
       </section>
 

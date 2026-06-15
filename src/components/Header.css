@@ -22,13 +22,15 @@
 
 .ar-header__logo {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
+  margin-left: 2px;
   text-decoration: none;
 }
 .ar-header__brand {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   line-height: 1;
 }
 .ar-header__brand-name {

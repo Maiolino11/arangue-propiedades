@@ -17,13 +17,6 @@ export const PROPERTIES = [
   { slug: 'terreno-villa-carlos-paz', title: 'Terreno con vista a las sierras', loc: 'Villa Carlos Paz', zona: 'Villa Carlos Paz', op: 'Venta', type: 'Terreno', price: 'USD 65.000', priceNum: 65000, currency: 'USD', beds: 0, baths: 0, area: '800 m²', status: 'nuevo', aptoCredito: false, address: 'Barrio Las Cumbres', img: img('1416879595882-3373a0480b5b'), desc: 'Terreno en altura con vista panorámica a las sierras, en zona de gran desarrollo. Servicios disponibles.' },
 ];
 
-export const STATS = [
-  { value: '+250', label: 'Propiedades activas' },
-  { value: '6', label: 'Localidades' },
-  { value: '2601', label: 'Matrícula COCIR' },
-  { value: '100%', label: 'Tasaciones sin cargo' },
-];
-
 export const ZONAS = [
   { name: 'Cañada de Gómez', count: '48 propiedades', img: img('1564013799919-ab600027ffc6') },
   { name: 'Rosario', count: '63 propiedades', img: img('1518780664697-55e3ad937233') },

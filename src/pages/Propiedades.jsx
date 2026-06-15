@@ -38,7 +38,7 @@ export default function Propiedades() {
       <PageHeader
         crumb="Propiedades"
         title="Propiedades en venta y alquiler"
-        subtitle="Encontrá tu próxima propiedad en Cañada de Gómez, Rosario y toda la región."
+        subtitle="Encontrá tu próxima propiedad."
       />
 
       <section className="ar-listado__body">

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import HeroB from '../components/HeroB.jsx';
 import PropertyCard from '../components/PropertyCard.jsx';
-import { PROPERTIES, STATS, ZONAS } from '../data/properties.js';
+import { PROPERTIES, ZONAS } from '../data/properties.js';
 import './Home.css';
 
 export default function Home() {
@@ -21,18 +21,6 @@ export default function Home() {
   return (
     <div>
       <HeroB />
-
-      {/* Trust strip */}
-      <section className="ar-trust">
-        <div className="ar-trust__grid">
-          {STATS.map((st) => (
-            <div className="ar-trust__item" key={st.label}>
-              <div className="ar-trust__value">{st.value}</div>
-              <div className="ar-trust__label">{st.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Featured */}
       <section className="ar-featured">
