@@ -4,11 +4,12 @@
   background: linear-gradient(120deg, #0A1A4A 0%, #15339E 60%, #1E6FE0 120%);
 }
 .ar-page-header__inner {
-  max-width: 1240px;
-  margin: 0 auto;
-  padding: 44px 32px 56px;
   position: relative;
   z-index: 2;
+}
+.ar-page-header__inner.ar-section {
+  padding-top: 44px;
+  padding-bottom: 90px;
 }
 @media (max-width: 599.98px) {
   .ar-page-header__inner { padding-left: 18px !important; padding-right: 18px !important; }

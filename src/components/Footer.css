@@ -14,7 +14,7 @@
   .ar-footer__top { grid-template-columns: 1fr 1fr; gap: 28px; }
 }
 @media (max-width: 599.98px) {
-  .ar-footer__top { padding-left: 18px; padding-right: 18px; }
+  .ar-footer__top { grid-template-columns: 1fr; padding-left: 18px; padding-right: 18px; }
 }
 
 .ar-footer__brand {

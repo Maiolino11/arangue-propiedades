@@ -1,8 +1,9 @@
-.ar-empresa {
+.ar-empresa.ar-section {
   padding-top: 60px;
   padding-bottom: 8px;
 }
-.ar-empresa + .ar-empresa { padding-top: 56px; }
+.ar-empresa.ar-section + .ar-empresa.ar-section { padding-top: 56px; }
+.ar-empresa.ar-section:last-child { padding-bottom: 60px; }
 
 .ar-empresa__h2 {
   font-family: var(--font-display);

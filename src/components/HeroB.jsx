@@ -1,10 +1,11 @@
 import HeroSearch from './HeroSearch.jsx';
+import heroImg from '../assets/hero-home.jpg';
 import './HeroB.css';
 
 export default function HeroB() {
   return (
     <section className="ar-heroB">
-      <img className="ar-heroB__bg" src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?auto=format&fit=crop&w=1600&q=80" alt="Propiedad destacada" />
+      <img className="ar-heroB__bg" src={heroImg} alt="Cañada de Gómez" />
       <div className="ar-heroB__overlay" />
       <div className="ar-heroB__content ar-fade-slow">
         <span className="ar-heroB__badge">
