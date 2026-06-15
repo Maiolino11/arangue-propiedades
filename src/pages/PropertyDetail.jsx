@@ -121,16 +121,13 @@ export default function PropertyDetail() {
 
           <h2 className="ar-detail__h2 ar-detail__h2--spaced">Ubicación</h2>
           <div className="ar-detail__map">
-            <svg width="100%" height="100%" style={{ position: 'absolute', inset: 0, opacity: .5 }} aria-hidden="true">
-              <defs><pattern id="grid" width="38" height="38" patternUnits="userSpaceOnUse"><path d="M38 0H0V38" fill="none" stroke="#C9D4EC" strokeWidth="1" /></pattern></defs>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-              <path d="M-20 180 Q 300 120 620 200 T 1300 170" fill="none" stroke="#B7C5E6" strokeWidth="6" />
-            </svg>
-            <div className="ar-detail__map-pin">
-              <span className="ar-detail__map-pin-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" /></svg>
-              </span>
-            </div>
+            <iframe
+              title="Mapa de ubicación"
+              src={`https://www.google.com/maps?q=${encodeURIComponent(`${sel.address}, ${sel.loc}`)}&output=embed`}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              allowFullScreen
+            />
             <div className="ar-detail__map-card">
               <div className="ar-detail__map-address">{sel.address}</div>
               <div className="ar-detail__map-loc">{sel.loc} · Ubicación aproximada</div>
