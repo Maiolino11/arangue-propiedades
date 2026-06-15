@@ -72,23 +72,24 @@
 .ar-footer__contact {
   display: flex;
   flex-direction: column;
-  gap: 13px;
+  gap: 16px;
   font-size: 14px;
-}
-.ar-footer__contact-phone {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 16px;
 }
 .ar-footer__contact-row {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 12px;
   color: #93A0C0;
+}
+.ar-footer__contact-row--link {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  transition: color .2s, opacity .2s;
+}
+.ar-footer__contact-row--link:hover {
+  color: #5C8BFF;
 }
 
 .ar-footer__bottom-wrap {

@@ -1,10 +1,17 @@
+import logoWhite from '../assets/logo-icon-white.png';
+import logoBlue from '../assets/logo-icon-blue.png';
+
+const RATIO = 1367 / 872; // icon width / height
+
 export default function Logo({ size = 38, color = '#fff' }) {
+  const src = color === '#fff' || color === 'white' ? logoWhite : logoBlue;
   return (
-    <svg width={size} height={size} viewBox="0 0 100 100" fill={color} aria-label="Arangue">
-      <rect x="45" y="6" width="9" height="27" rx="1" />
-      <path fillRule="evenodd" d="M9 74 L49 19 L91 74 Z M31 70 L43 45 L55 70 Z" />
-      <rect x="33" y="60" width="22" height="6" rx="1" />
-      <rect x="14" y="79" width="72" height="6" rx="2" />
-    </svg>
+    <img
+      src={src}
+      alt="Arangue Propiedades"
+      width={Math.round(size * RATIO)}
+      height={size}
+      style={{ display: 'block', objectFit: 'contain' }}
+    />
   );
 }

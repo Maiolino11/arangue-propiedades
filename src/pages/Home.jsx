@@ -1,15 +1,11 @@
 import { useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useApp } from '../context/AppContext.jsx';
-import HeroA from '../components/HeroA.jsx';
 import HeroB from '../components/HeroB.jsx';
 import PropertyCard from '../components/PropertyCard.jsx';
-import NavAnchor from '../components/NavAnchor.jsx';
 import { PROPERTIES, STATS, ZONAS } from '../data/properties.js';
 import './Home.css';
 
 export default function Home() {
-  const { isA } = useApp();
   const location = useLocation();
   const featured = PROPERTIES.slice(0, 6);
 
@@ -24,7 +20,7 @@ export default function Home() {
 
   return (
     <div>
-      {isA ? <HeroA /> : <HeroB />}
+      <HeroB />
 
       {/* Trust strip */}
       <section className="ar-trust">
@@ -78,24 +74,6 @@ export default function Home() {
               </span>
             </Link>
           ))}
-        </div>
-      </section>
-
-      {/* Tasación */}
-      <section id="tasacion" className="ar-tasacion">
-        <div className="ar-tasacion__panel">
-          <div className="ar-tasacion__title">
-            <h2>¿Querés saber cuánto vale tu propiedad?</h2>
-            <p>Tasación profesional sin cargo y sin compromiso. Te decimos un valor de mercado real para tu casa, terreno o campo.</p>
-          </div>
-          <div className="ar-tasacion__actions">
-            <NavAnchor id="contacto" className="ar-tasacion__btn-light">Solicitar tasación gratis</NavAnchor>
-            <a href="https://wa.me/543471595464" className="ar-tasacion__btn-outline">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M.06 24l1.68-6.13A11.86 11.86 0 0 1 .14 11.9C.14 5.33 5.5 0 12.08 0a11.82 11.82 0 0 1 8.42 3.49 11.78 11.78 0 0 1 3.5 8.42c0 6.57-5.37 11.9-11.95 11.9a12 12 0 0 1-5.72-1.46zm6.63-3.79c1.74.99 3 1.18 4.39 1.18 5.46 0 9.9-4.42 9.9-9.86a9.8 9.8 0 0 0-2.9-7 9.74 9.74 0 0 0-6.99-2.9C6.6 1.63 2.16 6.05 2.16 11.5a9.8 9.8 0 0 0 1.5 5.23l-.99 3.62z" /></svg>
-              Escribinos por WhatsApp
-            </a>
-          </div>
-          <svg viewBox="0 0 600 200" preserveAspectRatio="none" className="ar-tasacion__wave"><path d="M0 120 C150 40 350 40 600 120 L600 260 L0 260 Z" fill="#5C8BFF" /></svg>
         </div>
       </section>
     </div>

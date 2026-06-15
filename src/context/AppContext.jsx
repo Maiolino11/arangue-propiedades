@@ -10,7 +10,6 @@ export function defaultFilters() {
     currency: 'USD',
     min: '',
     max: '',
-    credito: false,
     dorm: 0,
     oport: false,
     verReservadas: true,
@@ -19,7 +18,6 @@ export function defaultFilters() {
 }
 
 export function AppProvider({ children }) {
-  const [variant, setVariant] = useState('A');
   const [filters, setFilters] = useState(defaultFilters);
 
   const setF = useCallback((patch) => {
@@ -37,10 +35,6 @@ export function AppProvider({ children }) {
   const clearFilters = useCallback(() => setFilters(defaultFilters()), []);
 
   const value = {
-    variant,
-    setVariant,
-    isA: variant === 'A',
-    isB: variant === 'B',
     filters,
     setF,
     toggleArr,

@@ -1,0 +1,105 @@
+.ar-empresa {
+  padding-top: 60px;
+  padding-bottom: 8px;
+}
+.ar-empresa + .ar-empresa { padding-top: 56px; }
+
+.ar-empresa__h2 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 30px;
+  letter-spacing: -.02em;
+  color: var(--c-ink);
+  margin: 0 0 14px;
+}
+.ar-empresa__about p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #414960;
+  max-width: 760px;
+  margin: 0 0 14px;
+}
+.ar-empresa__lead {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--c-muted);
+  margin: 0 0 18px;
+}
+
+/* Values */
+.ar-empresa__values { margin-top: 8px; }
+.ar-empresa__value {
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 6px 18px rgba(16, 24, 64, .05);
+}
+.ar-empresa__value h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--c-ink);
+  margin: 0 0 8px;
+}
+.ar-empresa__value p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--c-muted);
+  margin: 0;
+}
+
+/* Zonas */
+.ar-empresa__zonas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.ar-empresa__zona-chip {
+  font-weight: 700;
+  font-size: 13.5px;
+  color: var(--c-blue);
+  background: var(--c-chip-bg);
+  border: 1px solid var(--c-chip-border);
+  padding: 9px 16px;
+  border-radius: 999px;
+}
+
+/* CTA */
+.ar-empresa__cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  background: linear-gradient(120deg, #0A1A4A 0%, #15339E 60%, #1E6FE0 120%);
+  border-radius: 22px;
+  padding: 36px 40px;
+  margin-bottom: 60px;
+}
+.ar-empresa__cta .ar-empresa__h2,
+.ar-empresa__cta .ar-empresa__lead {
+  color: #fff;
+  margin: 0;
+}
+.ar-empresa__cta .ar-empresa__lead { margin-top: 8px; color: rgba(255, 255, 255, .82); }
+.ar-empresa__cta-btn {
+  flex: 0 0 auto;
+  background: #fff;
+  color: var(--c-blue);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 15px 26px;
+  border-radius: 12px;
+  white-space: nowrap;
+  transition: transform .2s;
+}
+.ar-empresa__cta-btn:hover { transform: translateY(-1px); }
+
+@media (max-width: 599.98px) {
+  .ar-empresa__cta {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 28px 24px;
+  }
+}

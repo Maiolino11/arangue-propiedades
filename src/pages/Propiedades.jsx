@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useApp } from '../context/AppContext.jsx';
 import { PROPERTIES } from '../data/properties.js';
 import FiltersPanel from '../components/FiltersPanel.jsx';
 import PropertyCard from '../components/PropertyCard.jsx';
+import PageHeader from '../components/PageHeader.jsx';
 import './Propiedades.css';
 
 export default function Propiedades() {
-  const { isA, filters: f, clearFilters } = useApp();
+  const { filters: f, clearFilters } = useApp();
   const [showFilters, setShowFilters] = useState(false);
 
   const num = (x) => {
@@ -21,7 +21,6 @@ export default function Propiedades() {
     if (p.op !== f.op) return false;
     if (f.tipos.length && !f.tipos.includes(p.type)) return false;
     if (f.zonas.length && !f.zonas.includes(p.zona)) return false;
-    if (f.credito && !p.aptoCredito) return false;
     if (f.dorm && (p.beds || 0) < f.dorm) return false;
     if (f.oport && p.status !== 'oportunidad') return false;
     if (!f.verReservadas && p.status === 'reservado') return false;
@@ -36,28 +35,11 @@ export default function Propiedades() {
 
   return (
     <div>
-      {isA ? (
-        <section className="ar-listado__header--a">
-          <div className="ar-section ar-listado__header-inner">
-            <div className="ar-listado__breadcrumb">
-              <Link to="/">Inicio</Link><span>/</span><span className="current">Propiedades</span>
-            </div>
-            <h1 className="ar-listado__title">Propiedades en venta y alquiler</h1>
-            <p className="ar-listado__subtitle">Encontrá tu próxima propiedad en Cañada de Gómez, Rosario y toda la región.</p>
-          </div>
-        </section>
-      ) : (
-        <section className="ar-listado__header--b">
-          <div className="ar-section ar-listado__header-inner">
-            <div className="ar-listado__breadcrumb">
-              <Link to="/">Inicio</Link><span>/</span><span className="current">Propiedades</span>
-            </div>
-            <h1 className="ar-listado__title">Propiedades en venta y alquiler</h1>
-            <p className="ar-listado__subtitle">Encontrá tu próxima propiedad en Cañada de Gómez, Rosario y toda la región.</p>
-          </div>
-          <svg viewBox="0 0 1440 80" preserveAspectRatio="none" className="ar-listado__wave"><path d="M0 40 C 360 4, 720 4, 1080 36 C 1260 52, 1350 56, 1440 40 L1440 80 L0 80 Z" fill="#F6F7FA" /></svg>
-        </section>
-      )}
+      <PageHeader
+        crumb="Propiedades"
+        title="Propiedades en venta y alquiler"
+        subtitle="Encontrá tu próxima propiedad en Cañada de Gómez, Rosario y toda la región."
+      />
 
       <section className="ar-listado__body">
         <FiltersPanel isOpen={showFilters} />

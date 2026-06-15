@@ -20,6 +20,28 @@
 .ar-detail__breadcrumb a:hover { color: var(--c-blue); }
 .ar-detail__breadcrumb .current { color: var(--c-blue); }
 
+.ar-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--c-border);
+  color: var(--c-text);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 11px;
+  cursor: pointer;
+  margin-bottom: 18px;
+  transition: background .2s, border-color .2s;
+}
+.ar-detail__back:hover {
+  background: var(--c-chip-bg);
+  border-color: var(--c-blue);
+  color: var(--c-blue);
+}
+
 .ar-detail__grid {
   display: grid;
   grid-template-columns: 1.5fr 1fr;
@@ -173,22 +195,6 @@
   transition: background .2s;
 }
 .ar-detail__cta-whatsapp:hover { background: var(--c-blue-dark); }
-.ar-detail__cta-call {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 9px;
-  background: #fff;
-  color: var(--c-blue);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 15px;
-  padding: 13px;
-  border-radius: 12px;
-  border: 1.5px solid var(--c-chip-border);
-  transition: background .2s;
-}
-.ar-detail__cta-call:hover { background: var(--c-chip-bg); }
 
 /* Description / features / map */
 .ar-detail__h2 {

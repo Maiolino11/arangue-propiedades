@@ -1,18 +1,34 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PROPERTIES, GALLERY_INTERIORS, STATUS_MAP, FEATURES_BY_TYPE } from '../data/properties.js';
+import { whatsappLink, mailtoLink } from '../data/site.js';
 import PropertyCard from '../components/PropertyCard.jsx';
 import Logo from '../components/Logo.jsx';
 import './PropertyDetail.css';
 
 export default function PropertyDetail() {
   const { slug } = useParams();
+  const navigate = useNavigate();
   const sel = PROPERTIES.find((p) => p.slug === slug) || PROPERTIES[0];
   const [gi, setGi] = useState(0);
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
 
   useEffect(() => {
     setGi(0);
+    setForm({
+      name: '',
+      email: '',
+      phone: '',
+      message: `Hola, me interesa esta propiedad (${sel.title}). Quisiera coordinar una visita.`,
+    });
   }, [slug]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const subject = `Consulta por: ${sel.title}`;
+    const body = `Nombre: ${form.name}\nEmail: ${form.email}\nTeléfono: ${form.phone}\n\n${form.message}`;
+    window.location.href = mailtoLink({ subject, body });
+  };
 
   const gallery = [sel.img, ...GALLERY_INTERIORS].filter((v, i, a) => a.indexOf(v) === i).slice(0, 5);
   const activeIndex = Math.min(gi, gallery.length - 1);
@@ -38,6 +54,11 @@ export default function PropertyDetail() {
         <Link to="/propiedades">Propiedades</Link><span>/</span>
         <span className="current">{sel.title}</span>
       </div>
+
+      <button className="ar-detail__back" onClick={() => navigate(-1)}>
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7" /></svg>
+        Volver
+      </button>
 
       <div className="ar-detail__grid">
         <div>
@@ -73,13 +94,9 @@ export default function PropertyDetail() {
             ))}
           </div>
           <div className="ar-detail__ctas">
-            <a href="https://wa.me/543471595464" className="ar-detail__cta-whatsapp">
+            <a href={whatsappLink(`Hola! Quisiera más información sobre esta propiedad: ${sel.title}.`)} target="_blank" rel="noopener noreferrer" className="ar-detail__cta-whatsapp">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M.06 24l1.68-6.13A11.86 11.86 0 0 1 .14 11.9C.14 5.33 5.5 0 12.08 0a11.82 11.82 0 0 1 8.42 3.49 11.78 11.78 0 0 1 3.5 8.42c0 6.57-5.37 11.9-11.95 11.9a12 12 0 0 1-5.72-1.46zm6.63-3.79c1.74.99 3 1.18 4.39 1.18 5.46 0 9.9-4.42 9.9-9.86a9.8 9.8 0 0 0-2.9-7 9.74 9.74 0 0 0-6.99-2.9C6.6 1.63 2.16 6.05 2.16 11.5a9.8 9.8 0 0 0 1.5 5.23l-.99 3.62z" /></svg>
               Consultar por WhatsApp
-            </a>
-            <a href="tel:3471595464" className="ar-detail__cta-call">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B36A8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
-              Llamar: 3471-595464
             </a>
           </div>
         </div>
@@ -124,11 +141,11 @@ export default function PropertyDetail() {
         <aside className="ar-detail__contact">
           <h3>Consultá por esta propiedad</h3>
           <p>Te respondemos a la brevedad.</p>
-          <form className="ar-detail__form" onSubmit={(e) => e.preventDefault()}>
-            <input type="text" placeholder="Nombre y apellido" />
-            <input type="email" placeholder="Email" />
-            <input type="tel" placeholder="Teléfono" />
-            <textarea rows="3" placeholder="Hola, me interesa esta propiedad. Quisiera coordinar una visita." />
+          <form className="ar-detail__form" onSubmit={handleSubmit}>
+            <input type="text" placeholder="Nombre y apellido" required value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+            <input type="email" placeholder="Email" required value={form.email} onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))} />
+            <input type="tel" placeholder="Teléfono" value={form.phone} onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))} />
+            <textarea rows="3" value={form.message} onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))} />
             <button type="submit">Enviar consulta</button>
           </form>
           <div className="ar-detail__agent">

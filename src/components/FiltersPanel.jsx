@@ -102,15 +102,6 @@ export default function FiltersPanel({ isOpen }) {
       </div>
 
       <div className="ar-filters__section">
-        <button className="ar-filters__switch-row" onClick={() => setF({ credito: !f.credito })}>
-          <span className="ar-filters__switch-label">Apto crédito</span>
-          <span className={`ar-filters__switch-track${f.credito ? ' is-on' : ''}`}>
-            <span className="ar-filters__switch-knob" />
-          </span>
-        </button>
-      </div>
-
-      <div className="ar-filters__section">
         <span className="ar-filters__label">Mostrar</span>
         <button className="ar-filters__check-item" onClick={() => setF({ verReservadas: !f.verReservadas })} style={{ width: '100%' }}>
           <span className={`ar-checkbox${f.verReservadas ? ' on' : ''}`}>{f.verReservadas && <CheckIcon />}</span>

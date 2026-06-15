@@ -1,0 +1,165 @@
+.ar-tasaciones {
+  padding-top: 60px;
+  padding-bottom: 72px;
+}
+
+/* Steps */
+.ar-tasaciones__steps {
+  margin-bottom: 48px;
+}
+.ar-tasaciones__step {
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 6px 18px rgba(16, 24, 64, .05);
+}
+.ar-tasaciones__step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: var(--c-chip-bg);
+  color: var(--c-blue);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 17px;
+  margin-bottom: 14px;
+}
+.ar-tasaciones__step h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--c-ink);
+  margin: 0 0 8px;
+}
+.ar-tasaciones__step p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--c-muted);
+  margin: 0;
+}
+
+/* Form + info grid */
+.ar-tasaciones__grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 879.98px) {
+  .ar-tasaciones__grid { grid-template-columns: 1fr; }
+}
+
+.ar-tasaciones__form,
+.ar-tasaciones__info {
+  background: #fff;
+  border: 1px solid var(--c-border);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 10px 30px rgba(16, 24, 64, .06);
+}
+
+.ar-tasaciones__form-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 21px;
+  color: var(--c-ink);
+  margin: 0 0 4px;
+}
+.ar-tasaciones__form-lead {
+  font-size: 13.5px;
+  color: var(--c-muted3);
+  margin: 0 0 16px;
+}
+.ar-tasaciones__form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ar-tasaciones__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+@media (max-width: 599.98px) {
+  .ar-tasaciones__row { grid-template-columns: 1fr; }
+}
+.ar-tasaciones__form input,
+.ar-tasaciones__form select,
+.ar-tasaciones__form textarea {
+  width: 100%;
+  background: var(--c-bg);
+  border: 1px solid #E1E5EE;
+  border-radius: 10px;
+  padding: 12px 13px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--c-text);
+  outline: none;
+}
+.ar-tasaciones__form textarea { resize: vertical; }
+.ar-tasaciones__form button {
+  background: var(--c-blue);
+  color: #fff;
+  border: none;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background .2s;
+}
+.ar-tasaciones__form button:hover { background: var(--c-blue-dark); }
+
+.ar-tasaciones__info h3 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 19px;
+  color: var(--c-ink);
+  margin: 0 0 14px;
+}
+.ar-tasaciones__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 0 0 22px;
+  font-size: 14.5px;
+  color: #414960;
+}
+.ar-tasaciones__list li {
+  position: relative;
+  padding-left: 24px;
+  line-height: 1.5;
+}
+.ar-tasaciones__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--c-chip-bg);
+  border: 1.5px solid var(--c-blue);
+}
+.ar-tasaciones__whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  background: #25D366;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px;
+  border-radius: 12px;
+  transition: background .2s;
+}
+.ar-tasaciones__whatsapp:hover { background: #1ebd59; }
