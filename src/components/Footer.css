@@ -19,12 +19,13 @@
 
 .ar-footer__brand {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   gap: 12px;
 }
 .ar-footer__brand-text {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   line-height: 1;
 }
 .ar-footer__brand-name {
@@ -33,6 +34,7 @@
   font-size: 18px;
   letter-spacing: .06em;
   color: #fff;
+  margin-top: 5px;
 }
 .ar-footer__brand-sub {
   font-weight: 700;
