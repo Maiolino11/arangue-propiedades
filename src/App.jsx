@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { AppProvider } from './context/AppContext.jsx';
 import Header from './components/Header.jsx';
@@ -10,6 +10,8 @@ import Tasaciones from './pages/Tasaciones.jsx';
 import Empresa from './pages/Empresa.jsx';
 import Contacto from './pages/Contacto.jsx';
 
+const AdminRoutes = lazy(() => import('./admin/AdminRoutes.jsx'));
+
 function ScrollManager() {
   const location = useLocation();
   useEffect(() => {
@@ -19,7 +21,7 @@ function ScrollManager() {
   return null;
 }
 
-export default function App() {
+function PublicSite() {
   return (
     <AppProvider>
       <ScrollManager />
@@ -34,5 +36,18 @@ export default function App() {
       </Routes>
       <Footer />
     </AppProvider>
+  );
+}
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/admin/*" element={
+        <Suspense fallback={null}>
+          <AdminRoutes />
+        </Suspense>
+      } />
+      <Route path="/*" element={<PublicSite />} />
+    </Routes>
   );
 }
